@@ -1,0 +1,16 @@
+\chapter{Considerações Finais}
+\label{cap:consideracoes_finais}
+
+A presente pesquisa originou-se do desafio de viabilizar a transição do ElicitBot para uma ferramenta de produção escalável e financeiramente viável. Para entender melhor os desafios a serem superados para o alcance deste objetivo, este primeiro ciclo de investigação (TCC 1) iniciou-se com a realização do diagnóstico do estado atual da ferramenta (\textbf{OE1}). Essa investigação confirmou a premissa de que a prova de conceito continha limitações estruturais que, sem intervenção, causariam o colapso do sistema por esgotamento de banda da rede (\textit{Payload Too Large}), custos proibitivos de API e incapacidade de lidar com vários usuários simultâneos.
+
+Para contornar este cenário, foi estruturado um plano de evolução do ElicitBot (\textbf{OE2}). Este detalha a criação de uma nova fundação de software documentada por meio de oito Registros de Decisão Arquitetural (ADRs), prevendo o desacoplamento do ecossistema (React e FastAPI), a introdução de uma camada de persistência transacional (PostgreSQL) e um motor híbrido de orquestração de memória (Janela Deslizante e Resumos+Entidades). As decisões planejadas viabilizaram o fracionamento da requisição HTTP e a aplicação do \textit{Context Caching} da API do Google Gemini, reduzindo os custos de processamento previstos de um teto de US\$ 401,50 para US\$ 39,81 mensais no modelo de ponta ou US\$ 13,11 no modelo econômico (valores atestados por meio de modelagem matemática baseada em \textit{Cloud Economics}). Os esforços realizados culminaram na estruturação dos \textit{Backlogs} Técnico e Funcional, atingindo as metas propostas para o TCC 1 e servindo como base para a realização das atividades da próxima fase.
+
+Dando sequência ao cronograma estabelecido, os próximos passos da pesquisa, a serem desenvolvidos durante a etapa de TCC 2, consistem em:
+
+\begin{itemize}
+    \item Implementar a evolução técnica e funcional (\textbf{OE3}).
+    \item Validar por meio de sessões práticas em sala de aula (\textbf{OE4}).
+    \item Avaliar as vantagens, limitações e desafios encontrados (\textbf{OE5}).
+\end{itemize}
+
+Espera-se que o produto final atue como um recurso pedagógico de apoio à prática de elicitação de requisitos em turmas da disciplina de Requisitos de Software, aprimorando a experiência e o aprendizado dos estudantes.

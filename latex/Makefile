@@ -1,7 +1,7 @@
 TARGET = TCC_FGA.pdf
 
 BIBTEX = bibtex
-LATEX = latex
+LATEX = pdflatex
 DVIPS = dvips
 PS2PDF = ps2pdf
 
@@ -18,8 +18,9 @@ EDITAVEIS_DIR = editaveis
 EDITAVEIS_SOURCES = informacoes.tex errata.tex dedicatoria.tex \
 					agradecimentos.tex epigrafe.tex resumo.tex abstract.tex \
 					abreviaturas.tex simbolos.tex introducao.tex \
-					aspectosgerais.tex consideracoes.tex textoepostexto.tex \
-					elementosdotexto.tex elementosdopostexto.tex \
+					aspectosgerais.tex consideracoes.tex texto2fundamentacao.tex \
+					texto3metodologia.tex texto4execucao.tex texto5resultados.tex \
+					texto6conclusao.tex elementosdotexto.tex elementosdopostexto.tex \
 					apendices.tex anexos.tex
 
 EDITAVEIS_FILES = $(addprefix $(EDITAVEIS_DIR)/, $(EDITAVEIS_SOURCES))
@@ -38,13 +39,11 @@ all:
 	@make $(TARGET)
      
 $(TARGET): $(MAIN_FILE) $(SOURCES) bibliografia.bib
-	$(LATEX) $(MAIN_FILE) $(SOURCES)
-	$(BIBTEX) $(AUX_FILE)
-	$(LATEX) $(MAIN_FILE) $(SOURCES)
-	$(LATEX) $(MAIN_FILE) $(SOURCES)
-	$(DVIPS) $(DVI_FILE)
-	$(PS2PDF) $(PS_FILE)
-	@cp $(PDF_FILE) $(TARGET)
+	$(LATEX) $(MAIN_FILE)
+	bibtex tcc
+	$(LATEX) $(MAIN_FILE)
+	$(LATEX) $(MAIN_FILE)
+	cp tcc.pdf $(TARGET)
 
 clean:
 	rm -f *~ *.dvi *.ps *.backup *.aux *.log

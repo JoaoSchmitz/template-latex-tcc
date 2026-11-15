@@ -1,9 +1,117 @@
-\chapter*[Introdução]{Introdução}
-\addcontentsline{toc}{chapter}{Introdução}
+\chapter{Introdução}
+\label{cap:introducao}
 
-Este documento apresenta considerações gerais e preliminares relacionadas 
-à redação de relatórios de Projeto de Graduação da Faculdade UnB Gama 
-(FGA). São abordados os diferentes aspectos sobre a estrutura do trabalho, 
-uso de programas de auxilio a edição, tiragem de cópias, encadernação, etc.
+\section{Contexto}
 
-Este template é uma adaptação do ABNTeX2\footnote{\url{https://github.com/abntex/abntex2/}}.
+Nos últimos anos, os avanços realizados na área de Inteligência Artificial têm gerado evoluções significativas na comunicação entre humanos e sistemas computacionais. Com a criação dos modelos de linguagem de grande porte (LLMs), a interação entre os dois lados se tornou mais dinâmica e natural, especialmente devido à capacidade desses modelos de manter contexto e simular diferentes personas \cite{junior2025}, impulsionando o uso da IA em diversas áreas, como atendimento ao cliente, saúde e educação \cite{adamopoulou2020, almogren2024}.
+
+No contexto da Engenharia de Software, uma das etapas mais importantes é a Engenharia de Requisitos, responsável por identificar, analisar e declarar as necessidades dos \textit{stakeholders}. Entretanto, este não é um processo simples, especialmente para iniciantes, pois exige pensamento crítico, comunicação efetiva e tempo considerável para garantir que os requisitos levantados sejam compreensíveis, rastreáveis, completos e alinhados às expectativas do cliente \cite{sommerville2016, ayres2021}.
+
+Com o intuito de facilitar este trabalho, \citeonline{junior2025} desenvolveram o ElicitBot, um agente conversacional que utiliza LLMs como base e atua como um facilitador do processo de elicitação. A ferramenta assume a persona de um analista de requisitos experiente, conduzindo entrevistas dinâmicas em contextos variados e declarando os resultados em formato padronizado (histórias de usuário). Durante seu projeto, os autores realizaram sessões práticas com estudantes da disciplina Requisitos de Software, visando validar a aplicabilidade da ferramenta que construíram. Ao analisar o \textit{feedback} recebido, percebeu-se um forte potencial pedagógico, uma vez que a interação com a ferramenta permitia aos alunos, que ainda apresentam vivência profissional limitada, compreender, na prática, o raciocínio investigativo envolvido na elicitação e formulação de requisitos.
+
+Esse potencial pedagógico vai ao encontro do conceito de Educação Inteligente (\textit{Smart Education}) \cite{zhu2016}. Observa-se que, com o avanço tecnológico atual, as técnicas de ensino utilizadas por professores estão passando por um processo contínuo de transformação, migrando de modelos puramente expositivos para abordagens mais práticas e interativas \cite{lin2024, almogren2024}. A adoção dessas tecnologias no ensino não ocorre apenas pelos benefícios de seu uso, mas também pelo fato de já fazerem parte essencial da vida dos alunos. Assim, o aprendizado se torna mais dinâmico e personalizado, aumentando sua eficiência e proporcionando um ensino de maior qualidade \cite{zhu2016, almogren2024}.
+
+Diante desse cenário, surge a oportunidade de evoluir a prova de conceito proposta por \citeonline{junior2025}, por meio da implementação de melhorias na experiência de uso e da avaliação de seu impacto no aprendizado prático de estudantes matriculados em disciplinas voltadas à Engenharia de Requisitos.
+
+\section{Justificativa}
+
+O ensino de Engenharia de Requisitos apresenta grandes desafios, especialmente no que se refere à aplicação prática das teorias apresentadas aos alunos em sala de aula. Isso ocorre devido à natureza da área, a qual é altamente sociotécnica e exige pensamento crítico para a identificação adequada das necessidades dos \textit{stakeholders} e das particularidades de cada contexto \cite{sommerville2016}.
+
+Nesse sentido, a presença de uma ferramenta de \textit{chatbot} inteligente baseado em LLMs, capaz de lidar com contextos variados de forma dinâmica, pode ser compreendida como um ambiente de prática simulada, no qual os alunos podem, por meio da experiência, desenvolver o raciocínio necessário para a elicitação de requisitos bem definidos \cite{urquiza2025, motger2021}. Além disso, o uso de tal ferramenta possibilita uma abordagem mais voltada às tendências atuais do mercado, pois reduz a carga associada às atividades mecânicas de declaração, permitindo que o aluno foque na análise crítica, trazendo uma maior eficiência para o processo e ajudando o desenvolvimento profissional.
+
+Por fim, esse trabalho justifica-se ao expandir o escopo da pesquisa iniciada por \citeonline{junior2025}. Apesar do avanço das tecnologias baseadas em Inteligência Artificial, ainda são limitados os estudos empíricos que exploram o uso dessas tecnologias no ensino de Engenharia de Requisitos. Portanto, ao expandir o uso educacional de uma prova de conceito previamente validada com estudantes, este trabalho contribui para a literatura de \textit{Smart Education} \cite{zhu2016, almogren2024}, fornecendo dados sobre as vantagens, limitações e desafios de uso de agentes conversacionais no apoio ao aprendizado prático de Engenharia de Requisitos.
+
+\section{Problema}
+
+Apesar da prova de conceito desenvolvida por \citeonline{junior2025} ter apresentado indícios de aplicabilidade pedagógica a partir de validações iniciais com estudantes, a ferramenta ainda não apresenta nível adequado de estabilidade, maturidade e escalabilidade para sua utilização controlada em turmas completas da disciplina de Requisitos de Software.
+
+No escopo deste trabalho, essas propriedades são delimitadas por critérios técnicos específicos da Engenharia de Software:
+
+\begin{itemize}
+    \item \textbf{Escalabilidade:} refere-se à capacidade arquitetural do sistema de suportar acessos simultâneos de turmas inteiras (de 40 a 50 usuários concorrentes) sem degradação severa do tempo de resposta ou esgotamento dos recursos do servidor.
+    \item \textbf{Estabilidade:} consiste na resiliência operacional da ferramenta, caracterizada pela persistência do estado conversacional, pela eliminação de perdas abruptas de dados de sessão e pela redução de falhas de comunicação com as APIs externas de modelos de linguagem.
+    \item \textbf{Maturidade:} expressa o grau de evolução funcional e de usabilidade do artefato, garantindo que o fluxo interativo forneça mecanismos adequados de controle ao usuário, reduzindo redundâncias e comportamentos genéricos do modelo conversacional.
+\end{itemize}
+
+Diante desse cenário, este trabalho busca responder à seguinte questão: Como evoluir e validar uma prova de conceito de \textit{chatbot} baseado em LLMs para que ela se torne um recurso pedagógico estável, escalável e aplicável de forma controlada na disciplina de Requisitos de Software?
+
+\section{Objetivos}
+
+\subsection{Objetivo Geral}
+
+Viabilizar a ferramenta ElicitBot permitindo seu uso controlado como recurso pedagógico de apoio à prática de elicitação de requisitos em turmas da disciplina de Requisitos de Software.
+
+\subsection{Objetivos Específicos}
+
+\begin{itemize}
+    \item (OE1) Diagnosticar o estado atual do ElicitBot, mapeando seu escopo funcional, limitações de implementação e gargalos arquiteturais.
+    \item (OE2) Estruturar o plano de evolução técnica e funcional do ElicitBot, contemplando as estratégias de mitigação arquitetural e a especificação do \textit{backlog} priorizado para uso em turma.
+    \item (OE3) Implementar a evolução técnica e funcional do ElicitBot, visando torná-lo viável, estável e escalável para aplicação em cenários educacionais reais.
+    \item (OE4) Validar a ferramenta em sessão prática com alunos da disciplina Requisitos de Software, coletando dados de uso e percepção dos estudantes para apoiar o seu refinamento.
+    \item (OE5) Avaliar as vantagens, limitações e desafios do uso de \textit{chatbots} baseados em LLMs no apoio ao aprendizado prático de Engenharia de Requisitos.
+\end{itemize}
+
+\section{Metodologia}
+
+Do ponto de vista metodológico, esta pesquisa adota a abordagem de \textit{Design Science Research} (DSR) aplicada à evolução e validação de um artefato de software educacional. A fundamentação completa, a classificação da pesquisa, os métodos para realização das atividades e, em conformidade com a Portaria CNPq nº 2.664/2026, o detalhamento das ferramentas de Inteligência Artificial Generativa utilizadas como suporte operacional nesta pesquisa são detalhados no Capítulo 3.
+
+A Tabela \ref{tab:objetivos_atividades} sumariza a relação entre os objetivos específicos (OE) e as atividades metodológicas estipuladas, delimitando claramente o escopo de entrega de cada fase do projeto.
+
+\noindent
+{
+\footnotesize 
+\renewcommand{\arraystretch}{1.1}
+
+\begin{xltabular}{\textwidth}{|X|X|}
+    \caption{Objetivos específicos e atividades detalhadas por fase do projeto}
+    \label{tab:objetivos_atividades} \\
+    \toprule
+    \textbf{Objetivos Específicos (OE)} & \textbf{Atividades} \\
+    \midrule
+    \endfirsthead
+
+    \multicolumn{2}{c}%
+    {{\bfseries \tablename\ \thetable{} -- continuação da página anterior}} \\
+    \toprule
+    \textbf{Objetivos Específicos (OE)} & \textbf{Atividades} \\
+    \midrule
+    \endhead
+
+    \midrule \multicolumn{2}{r}{{Continua na próxima página...}} \\
+    \endfoot
+
+    \bottomrule
+    \multicolumn{2}{c}{\small Fonte: Elaborada pelo autor.} \\
+    \endlastfoot
+    
+    (OE1) Diagnosticar o estado atual do ElicitBot, mapeando seu escopo funcional, limitações de implementação e gargalos arquiteturais. & 
+    A1.1: Análise do trabalho acadêmico original e do código-fonte herdado. \newline
+    A1.2: Levantamento e identificação de gargalos arquiteturais e de escalabilidade. \\
+    \midrule
+    
+    (OE2) Estruturar o plano de evolução técnica e funcional do ElicitBot, contemplando as estratégias de mitigação arquitetural e a especificação do \textit{backlog} priorizado para uso em turma. & 
+    A2.1: Definição de estratégias para mitigar as limitações de escalabilidade. \newline
+    A2.2: Especificação e priorização do \textit{backlog} de evolução funcional. \\
+    \midrule
+    
+    (OE3) Implementar a evolução técnica e funcional do ElicitBot, visando torná-lo viável, estável e escalável para aplicação em cenários educacionais reais. & 
+    A3.1: Implementação do plano de ação para resolver os problemas de escalabilidade. \newline
+    A3.2: Desenvolvimento das melhorias funcionais priorizadas. \newline
+    A3.3: Execução de testes técnicos para validação de estabilidade estrutural. \\
+    \midrule
+    
+    (OE4) Validar a ferramenta em sessão prática com alunos da disciplina Requisitos de Software, coletando dados de uso e percepção dos estudantes para apoiar o seu refinamento. & 
+    A4.1: Implantação e aplicação do sistema em sala de aula. \newline
+    A4.2: Coleta de métricas de uso e aplicação do questionário de avaliação. \newline
+    A4.3: Análise qualitativa dos relatos e sistematização do plano de ação. \newline
+    A4.4: Aplicação das correções imediatas para refinamento do sistema. \\
+    \midrule
+    
+    (OE5) Avaliar as vantagens, limitações e desafios do uso de \textit{chatbots} baseados em LLMs no apoio ao aprendizado prático de Engenharia de Requisitos. & 
+    A5.1: Consolidação, higienização e apuração estatística dos dados quantitativos. \newline
+    A5.2: Triangulação dos resultados quantitativos e qualitativos da validação. \newline
+    A5.3: Análise comparativa da evolução técnica e funcional da ferramenta. \\
+\end{xltabular}
+}
+
+Na organização textual desta monografia, o relato de execução técnica das Fases 1, 2 e 3, bem como a exposição direta dos dados coletados (A4.2, A4.3 e estatísticas descritivas de A5.1), concentram-se no Capítulo \ref{cap:resultados} (Execução da Pesquisa e Resultados). Por sua vez, a interpretação crítica desses indicadores, a triangulação metodológica (A5.2), a análise comparativa entre as versões da ferramenta (A5.3), as contribuições e as limitações do estudo compõem o Capítulo \ref{cap:analise} (Análise dos Resultados).

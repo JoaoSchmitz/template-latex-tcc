@@ -1,13 +1,129 @@
 \begin{apendicesenv}
 
-\partapendices
+\chapter{Resumo da Transcrição da Entrevista com Criador Original do ElicitBot}
+\label{apendice:resumo_entrevista}
 
-\chapter{Primeiro Apêndice}
+\noindent\textbf{Resumo Gerado Por:} NotebookLM, com base na transcrição completa.\\
+\textbf{Método de Realização:} Remoto (via Teams).\\
+\textbf{Data/Hora:} 01 de Junho de 2026 às 15h BRT.\\
+\textbf{Duração:} Aproximadamente 35 minutos.\\
+\textbf{Participantes:} João Matheus de Oliveira Schmitz; Fause Carlos Mascarenhas Lustosa Júnior.
 
-Texto do primeiro apêndice.
+\section*{Eixo 1 - Decisões Arquiteturais e Tecnológicas}
 
-\chapter{Segundo Apêndice}
+\begin{itemize}
+  \item \textbf{Escolha da \textit{Stack} (Python e Streamlit):} O Python foi escolhido pela facilidade e vasta quantidade de bibliotecas para conexão com LLMs. O Streamlit foi adotado como interface de acesso por ser muito fácil de criar um \textit{front-end}/chatbot e por oferecer uma plataforma de \textit{deploy} (hospedagem) simples e gratuita.
+  \item \textbf{Tecnologias Descartadas:} O plano inicial era ter uma arquitetura mais complexa com \textit{back-end} em Python, \textit{front-end} em React e conexão com um banco de dados robusto. Optaram pela arquitetura monolítica no Streamlit devido ao tempo curto e à facilidade de implementação para o TCC.
+  \item \textbf{Integração com LLM e \textit{Rate Limits}:} Inicialmente, tentaram usar modelos locais hospedados em computadores do laboratório para evitar custos e limites de requisição. No entanto, isso gerava muito \textit{delay} nas respostas, prejudicando a conversa. Mudaram para as APIs do GPT e Gemini. Atualmente utilizam a API do Gemini 3.1 Flash-Lite de uma conta de estudante, com limite diário de tokens. Para escalar, Fause recomenda (se possível) voltar para modelos \textit{open source} rodando em servidores da UnB que possuam GPU, eliminando o \textit{delay} e os custos.
+\end{itemize}
 
-Texto do segundo apêndice.
+\section*{Eixo 2 - Gerenciamento de Estado e Concorrência}
+
+\begin{itemize}
+  \item \textbf{Manutenção de Contexto:} Foi implementada utilizando o \texttt{session\_state} nativo do Streamlit, que cria uma sessão individual para cada usuário e armazena o histórico. O problema é que esse cache é volátil, podendo causar a perda de informações úteis para treinamentos futuros.
+  \item \textbf{Acessos Simultâneos e Problemas:} O maior problema enfrentado foi com a queda de conexão dos alunos (usando o Wi-Fi da universidade); ao reconectar, o cache era zerado e a entrevista precisava recomeçar. A implementação de um banco de dados resolveria isso. Além disso, como o Streamlit é \textit{single-thread}, colocar muitos alunos na mesma sessão pode causar conflitos de concorrência. Uma solução paliativa seria rodar múltiplas instâncias (\textit{deploys}) do código, gerando links diferentes para dividir as turmas.
+  \item \textbf{Maior Ponto de Falha Atual:} Se 40 alunos tentassem acessar hoje, o sistema falharia pelo limite de requisições da conta atual da API do LLM.
+\end{itemize}
+
+\section*{Eixo 3 - Débito Técnico e Atalhos}
+
+\begin{itemize}
+  \item \textbf{Principal Débito Técnico:} A adoção do Streamlit como solução provisória para prototipação rápida consolidou-se como o principal débito técnico, pois ele dificulta o armazenamento de dados persistentes e a escalabilidade do sistema.
+  \item \textbf{O que reescrever:} Fause recomenda reescrever totalmente o \textit{front-end} (sair do Streamlit). A parte lógica do \textit{back-end} (LLM Manager) é considerada boa e simples, precisando apenas de adaptações para a nova interface.
+  \item \textbf{Segurança:} A chave da API foi protegida utilizando o Secrets do Streamlit (similar a um arquivo \texttt{.env}), o que resolveu a segurança sem vazamentos.
+\end{itemize}
+
+\section*{Eixo 4 - Visão de Futuro}
+
+\begin{itemize}
+  \item \textbf{Mudança Arquitetural com mais tempo:} A principal mudança seria a implementação de um banco de dados mais complexo para resolver a volatilidade das informações e armazenar os dados.
+  \item \textbf{Funcionalidades Idealizadas (Não Implementadas):}
+  \begin{itemize}
+    \item Permitir que o usuário edite manualmente os requisitos gerados pela IA no meio da conversa. Ao editar, o sistema enviaria um \textit{prompt} oculto atualizando a memória do LLM para evitar redundâncias futuras.
+    \item Botões de \textit{like/dislike} em cada requisito para guiar o LLM sobre as preferências do usuário (Human-in-the-loop).
+    \item Um chat compartilhado por equipe, onde os alunos pudessem ver os requisitos elicitados por seus colegas, mas cuja complexidade no Streamlit inviabilizou a ideia.
+    \item Um questionário rápido de avaliação (priorizando questões fechadas para reduzir a fadiga de resposta e aumentar a adesão dos estudantes) ao final da sessão, para coletar dados sobre a usabilidade.
+    \item Implementar um banco de dados vetorial (como o Qdrant) usando RAG para que o LLM busque contextos de requisitos de projetos anteriores parecidos (ex: lojas de e-commerce), melhorando e acelerando as respostas.
+  \end{itemize}
+  \item \textbf{Viabilidade para Vários Alunos:} Se o uso de modelos \textit{open source} em servidores da UnB não for possível, Fause estima que investir cerca de 10 dólares (R\$ 50) seria suficiente para suprir as requisições de 40 alunos durante um semestre inteiro, já que modelos como o Gemini Flash são muito baratos.
+\end{itemize}
+
+\chapter{Sistematização Qualitativa dos Relatos e Plano de Ação}
+\label{apendice:triagem_qualitativa}
+
+Este apêndice apresenta o mapeamento completo resultante da análise qualitativa das respostas abertas fornecidas pelos $N = 65$ estudantes no formulário de avaliação de uso do ElicitBot (Atividade A4.3), detalhando a frequência de ocorrência ($f$), os identificadores anonimizados dos participantes respondentes (\texttt{[P1]} a \texttt{[P65]}), o diagnóstico ou descrição do fenômeno e o respectivo plano de ação ou justificativa de escopo.
+
+\noindent
+{
+\footnotesize 
+\renewcommand{\arraystretch}{1.15}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+
+\begin{xltabular}{\textwidth}{|l|>{\raggedright\arraybackslash}p{3.4cm}|>{\raggedright\arraybackslash}p{2.7cm}|>{\raggedright\arraybackslash}X|}
+    \caption{Detalhamento da Análise Qualitativa, Frequência, Rastreabilidade e Plano de Ação}
+    \label{tab:apendice_plano_acao} \\
+    \toprule
+    \textbf{ID} & \textbf{Tópico / Fenômeno} & \textbf{Frequência e Participantes} & \textbf{Diagnóstico, Justificativa de Escopo ou Plano de Ação} \\
+    \midrule
+    \endfirsthead
+
+    \multicolumn{4}{c}%
+    {{\bfseries \tablename\ \thetable{} -- continuação da página anterior}} \\
+    \toprule
+    \textbf{ID} & \textbf{Tópico / Fenômeno} & \textbf{Frequência e Participantes} & \textbf{Diagnóstico, Justificativa de Escopo ou Plano de Ação} \\
+    \midrule
+    \endhead
+
+    \midrule \multicolumn{4}{r}{{Continua na próxima página...}} \\
+    \endfoot
+
+    \bottomrule
+    \multicolumn{4}{c}{\small Fonte: Elaborada pelo autor a partir dos dados qualitativos da validação ($N = 65$).} \\
+    \endlastfoot
+    
+    \multicolumn{4}{|l|}{\textbf{1. Correções Imediatas (Fricções de UX e Falhas de Sincronização de Estado)}} \\
+    \midrule
+    CI-01 & Limitações de usabilidade no componente de entrada de dados & \textbf{22 relatos} \newline [P1, P9, P11, P12, P14, P16, P19, P20, P21, P22, P24, P42, P43, P45, P47, P48, P50, P53, P55, P56, P57, P64] & \textbf{Diagnóstico:} Ausência de redimensionamento vertical (\textit{auto-resize}), perda de foco do cursor e falta de atalho para quebra de linha (\texttt{Shift+Enter}) dificultaram a formulação e revisão de respostas longas em linha única. \newline \textbf{Plano de Ação:} Substituição por componente dinâmico autoexpansível multilinha no React, preservação de foco e remapeamento de eventos de teclado. \\
+    \midrule
+    CI-02 & Falha de concorrência na validação de requisitos (Fase 11) & \textbf{14 relatos} \newline [P1, P9, P15, P24, P26, P28, P29, P30, P31, P34, P35, P36, P38, P56] & \textbf{Diagnóstico:} Instabilidade e interrupção de fluxo quando a IA tentava atualizar um RF e submetê-lo à validação no mesmo turno, ou alterar \texttt{pendencias\_validacao} junto a outros atributos em uma única operação \texttt{atualizar}, somada à ausência de mensagem clara explicando a falha. \newline \textbf{Plano de Ação:} Adequação do \textit{System Prompt} e do Motor de Operações para exigir persistência e validação determinística prévia antes da operação \texttt{validar}, retirada da trava de exclusividade em \texttt{pendencias\_validacao} e exibição de erros detalhados na interface. \\
+    \midrule
+    CI-03 & Fricções de navegação no \textit{chat} e fechamento de modais & \textbf{5 relatos} \newline [P5, P10, P34, P51, P53] & \textbf{Diagnóstico:} Necessidade de rolagem manual do \textit{chat} após novas mensagens [P5, P10, P34] e exigência de clique estrito no botão ``X'' para fechar modais de artefatos [P51, P53]. \newline \textbf{Plano de Ação:} Implementação de âncoras de \textit{auto-scroll} no contêiner de mensagens e fechamento de modais via clique na camada de fundo (\textit{backdrop}). \\
+    \midrule
+    CI-04 & Duplicação semântica na edição/geração e sincronização de exclusão & \textbf{5 relatos} \newline [P5, P23, P34, P55, P57] & \textbf{Diagnóstico:} Em refinamentos específicos, o LLM emitiu a operação \texttt{criar} gerando artefatos duplicados em vez de acionar \texttt{atualizar} na \textit{Tag} existente [P5, P23, P55, P57], ou referenciou no diálogo uma \textit{Tag} já deletada manualmente [P34]. \newline \textbf{Plano de Ação:} Reforço das diretrizes de ``Manutenção de Identidade por Tag'' e ``Sincronização de Exclusão'' no \textit{prompt} (\texttt{v1.0.4}), restringindo \texttt{criar} diante de equivalência semântica e ignorando \textit{Tags} removidas da memória ativa. \\
+    \midrule
+    \multicolumn{4}{|l|}{\textbf{2. Limitações Aceitáveis e Delimitação de Escopo (Travas Metodológicas e \textit{Human-in-the-Loop})}} \\
+    \midrule
+    LA-01 & Refinamento manual (\textit{Human-in-the-Loop}) e herança do nome do projeto & \textbf{12 relatos} \newline [P6, P9, P10, P17, P26, P28, P29, P34, P35, P36, P38, P56] & Uso da edição manual para ajustar artefatos extraídos [P6, P9, P10, P17, P34, P35, P36, P56] ou alterar o título do projeto/solução [P26, P28, P29, P38]. A edição do título decorre de preenchimento inicial genérico pelo próprio usuário na criação; já os ajustes textuais em artefatos validam o propósito arquitetural do mecanismo \textit{Human-in-the-Loop} frente à síntese probabilística de LLMs. \\
+    \midrule
+    LA-02 & Nível de abstração dos artefatos e granularidade de MVP & \textbf{7 relatos} \newline [P21, P30, P31, P32, P45, P50, P53] & Percepção de artefatos mais concisos do que a documentação completa da disciplina [P21, P30, P31, P32, P53] ou MVP sem desdobramento automático de todo um CRUD [P45, P50]. Comportamento intencional: o ElicitBot evita inferir ou inventar regras além do contexto fornecido, cabendo ao usuário expandir os dados até o nível desejado. \\
+    \midrule
+    LA-03 & Variações não determinísticas do modelo e rigor na transição de fases & \textbf{6 relatos} \newline [P7, P10, P16, P34, P36, P40] & Lapsos pontuais de atenção em mensagens com múltiplos contextos [P7], confirmação dupla antes de avançar [P10, P16], repetição de perguntas em Objetivos [P34, P36] ou perguntas percebidas como abstratas [P40]. Limitações inerentes à atenção seletiva de LLMs e a respostas vagas dos usuários que acionam as travas da Máquina de Estados. \\
+    \midrule
+    LA-04 & Resiliência a desvios de domínio & \textbf{4 relatos} \newline [P39, P43, P47, P52] & Quando provocado com temas alheios ao projeto (ex: receitas de bolo [P39, P43, P47]), o agente respondeu brevemente, mas reconduziu imediatamente a conversa ao ponto exato da elicitação [P43, P52], dispensando custos computacionais adicionais com barreiras (\textit{guardrails}) complexas. \\
+    \midrule
+    LA-05 & Rigidez metodológica e formatação padrão & \textbf{3 relatos} \newline [P39, P40, P47] & Tentativa de adoção de \textit{frameworks} alternativos a Histórias de Usuário, como \textit{Feature-Driven Development} (FDD) [P39, P40, P47]. O sistema manteve estritamente o formato Connextra, comprovando a eficácia da blindagem contra alucinação de formato no escopo atual. \\
+    \midrule
+    LA-06 & Interação incremental na elicitação e validação de requisitos & \textbf{3 relatos} \newline [P24, P34, P65] & Sugestão para envio massivo de listas de requisitos [P24], abordagem de múltiplos requisitos por vez [P34] ou validação de pendências em lote [P65]. Reflexo do viés de teste (equipes já possuíam projetos prontos); pedagogicamente, a condução unitária é intencional para forçar a análise atômica de rastreabilidade, regras e critérios de cada RF. \\
+    \midrule
+    LA-07 & Simulação de entrevista consultiva -- papel de \textit{stakeholder} & \textbf{2 relatos} \newline [P5, P8] & Relato de que o assistente tratou o estudante como cliente final do sistema [P5, P8]. Funcionamento projetado para a dinâmica: o ElicitBot atua como engenheiro de requisitos conduzindo a entrevista e o aluno assume o papel de detentor do domínio/cliente. \\
+    \midrule
+    \multicolumn{4}{|l|}{\textbf{3. Trabalhos Futuros (Sugestões de Inovação Funcional e Expansão Tecnológica)}} \\
+    \midrule
+    TF-01 & Ingestão de arquivos e contexto multimodal & \textbf{10 relatos} \newline [P4, P6, P7, P10, P12, P22, P24, P47, P52, P55] & Suporte ao envio de documentos (PDF, Markdown, Word) e leitura de \textit{links} [P12, P22, P24, P47, P52, P55], bem como anexo de imagens e capturas de tela no \textit{chat} [P4, P6, P7, P10, P12, P22] via extração textual (\textit{document parsing}), \textit{prompts} multimodais com \textit{Context Caching} ou RAG. \\
+    \midrule
+    TF-02 & Interface de voz (\textit{Speech-to-Text}) & \textbf{4 relatos} \newline [P12, P42, P47, P52] & Inserção de transcrição de áudio via microfone para agilizar a entrevista consultiva, aproximando a interação de uma reunião real de elicitação [P12, P42, P47, P52]. \\
+    \midrule
+    TF-03 & \textit{Onboarding} visual e guia conceitual & \textbf{3 relatos} \newline [P12, P24, P46] & Camada de \textit{onboarding} interativo com \textit{cards} explicativos sobre o funcionamento da interface [P12, P46] e dicas conceituais sobre cada etapa e artefato (distinção entre Envolvidos, Interesses e Necessidades) [P24]. \\
+    \midrule
+    TF-04 & Suporte parametrizável a múltiplos \textit{frameworks} de requisitos & \textbf{3 relatos} \newline [P39, P40, P47] & Modularização futura da Máquina de Estados para permitir a seleção prévia de outras abordagens e representações de Engenharia de Software (como FDD) além do padrão Connextra [P39, P40, P47]. \\
+    \midrule
+    TF-05 & Visualização em grafo da matriz de rastreabilidade e diagramas & \textbf{2 relatos} \newline [P12, P56] & Geração de diagramas visuais do projeto [P12] e representação gráfica em formato de grafo ou árvore das dependências de rastreabilidade entre os artefatos (\texttt{Problema} $\rightarrow$ \texttt{Objetivo} $\rightarrow$ \texttt{Solução} $\rightarrow$ \texttt{RF}) [P56]. \\
+    \midrule
+    TF-06 & Transparência de raciocínio (Modo Pensamento) & \textbf{1 relato} \newline [P5] & Adição de componente expansível na interface exibindo o fluxo de raciocínio interno (\textit{Chain-of-Thought}) utilizado pelo modelo para analisar respostas e extrair artefatos [P5]. \\
+    \midrule
+    TF-07 & Controle de submissão e interrupção de resposta (\textit{Stop Generation}) & \textbf{1 relato} \newline [P12] & Implementação de botão de pausa/cancelamento imediato da requisição em andamento, permitindo interromper submissões enviadas com erros de digitação ou incompletas [P12]. \\
+\end{xltabular}
+}
 
 \end{apendicesenv}
