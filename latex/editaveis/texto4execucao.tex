@@ -1,7 +1,7 @@
 \chapter{Execução da Pesquisa e Resultados}
 \label{cap:resultados}
 
-Este capítulo apresenta o relato de execução prática das atividades metodológicas estabelecidas no Capítulo \ref{cap:metodologia} e a exposição direta dos resultados obtidos. Em alinhamento com os ciclos da \textit{Design Science Research} (DSR), as seções subsequentes documentam: o diagnóstico do sistema original e o planejamento arquitetural (Fase 1); a reengenharia do software, a evolução do motor conversacional e os testes de estabilidade sob carga (Fase 2); a implantação em sala de aula, a sistematização dos relatos e o refinamento imediato do sistema (Fase 3); e a apresentação consolidada dos dados quantitativos coletados (Fase 4), cuja interpretação crítica e análise comparativa são aprofundadas no Capítulo \ref{cap:analise_resultados}.
+Este capítulo apresenta o relato de execução prática das atividades metodológicas estabelecidas no Capítulo \ref{cap:metodologia} e a exposição direta dos resultados obtidos. Em alinhamento com os ciclos da \textit{Design Science Research} (DSR), as seções subsequentes documentam: o diagnóstico do sistema original e o planejamento arquitetural (Fase 1); a reengenharia do software, a evolução do motor conversacional e os testes de estabilidade sob carga (Fase 2); a implantação em sala de aula, a sistematização dos relatos e o refinamento imediato do sistema (Fase 3); e a apresentação consolidada dos dados quantitativos coletados (Fase 4), cuja interpretação crítica e análise comparativa são aprofundadas no Capítulo \ref{cap:analise}.
 
 \section{Fase 1: Diagnóstico e Planejamento}
 
@@ -66,7 +66,7 @@ A partir desse mapeamento, a análise detalhada do código-fonte permitiu descon
     \item \textbf{Exportação de Dados (R6):} A ferramenta oferecia suporte para a extração do trabalho realizado, permitindo que as histórias de usuário validadas fossem exportadas e baixadas pelo aluno em uma planilha eletrônica (.xlsx) ao término da sessão.
 \end{itemize}
 
-O levantamento dessas capacidades comprovou que a prova de conceito cumpriu integralmente seu propósito original de demonstrar a viabilidade da elicitação automatizada guiada por \textit{prompts} em sessões individuais. Paralelamente, a inspeção estática permitiu caracterizar as escolhas de implementação daquela versão - baseada em integração direta entre interface e controle, chamadas independentes por turno à API e armazenamento em memória de sessão local -, fornecendo os insumos necessários para dimensionar as adaptações exigidas para o uso simultâneo em turmas completas, detalhadas na atividade a seguir.
+O levantamento dessas capacidades comprovou que a prova de conceito cumpriu integralmente seu propósito original de demonstrar a viabilidade da elicitação automatizada guiada por \textit{prompts} em sessões individuais. Paralelamente, a inspeção estática permitiu caracterizar as escolhas de implementação daquela versão, a qual se baseava em integração direta entre interface e controle, chamadas independentes por turno à API e armazenamento em memória de sessão local. Esse mapeamento forneceu os insumos necessários para dimensionar as adaptações exigidas para o uso simultâneo em turmas completas, detalhadas na atividade a seguir.
 
 \subsection{(A1.2) Levantamento e identificação de gargalos arquiteturais e de escalabilidade}
 
@@ -716,9 +716,9 @@ Para cumprir esse objetivo, estruturou-se o \textit{Backlog} Funcional inicial d
 Visando orientar o fluxo de desenvolvimento e delimitar o Subconjunto Mínimo Utilizável (\textit{Minimum Usable Subset}) do Produto Mínimo Viável (MVP), o escopo foi priorizado utilizando a matriz técnica MoSCoW \cite{agilebusiness2014}:
 
 \begin{itemize}
-    \item \textbf{\textit{Must Have} (Deve ter):} Funcionalidades vitais sem as quais o sistema perde seu propósito principal ou torna-se inseguro para operação em sala de aula (autenticação, criação/recuperação de projetos, ativação de travas de acesso/horário, condução conversacional, extração e exportação).
-    \item \textbf{\textit{Should Have} (Deveria ter):} Funcionalidades de alto valor agregado — incluindo operações de manutenção do ciclo de vida de registros (edição de títulos, limpeza de testes e revogação de regras) e mecanismos de controle \textit{Human-in-the-Loop} —, mas cuja ausência temporária não inviabilizaria a execução básica da sessão.
-    \item \textbf{\textit{Could Have} (Poderia ter):} Requisitos desejáveis de transparência e \textit{feedback} granular em nível de card, implementados caso haja viabilidade de tempo no cronograma.
+    \item \textbf{\textit{Must Have} (Deve ter):} Funcionalidades vitais sem as quais o sistema perde seu propósito principal ou torna-se inseguro para operação em sala de aula (autenticação, criação e recuperação de projetos, ativação de travas de acesso e horário, condução conversacional, extração e exportação).
+    \item \textbf{\textit{Should Have} (Deveria ter):} Funcionalidades de alto valor agregado, incluindo operações de manutenção do ciclo de vida de registros (edição de títulos, limpeza de testes e revogação de regras) e mecanismos de controle \textit{Human-in-the-Loop}, mas cuja ausência temporária não inviabilizaria a execução básica da sessão.
+    \item \textbf{\textit{Could Have} (Poderia ter):} Requisitos desejáveis de transparência e \textit{feedback} granular em nível de \textit{card}, implementados caso haja viabilidade de tempo no cronograma.
     \item \textbf{\textit{Won't Have} (Não terá desta vez):} Funcionalidades complexas fora do escopo atual, documentadas para compor os trabalhos futuros.
 \end{itemize}
 
@@ -857,10 +857,10 @@ As 23 funcionalidades planejadas inicialmente foram agrupadas em três Épicos f
 A estruturação deste \textit{Backlog} Funcional inicial, priorizado pela técnica MoSCoW, foi alinhada e validada junto ao \textit{stakeholder} do projeto (professor orientador), estabelecendo uma distribuição equilibrada em conformidade com as boas práticas do \textit{framework} DSDM \cite{agilebusiness2014}:
 
 \begin{itemize}
-    \item \textbf{\textit{Must Have} (Deve ter -- 12 histórias, 52,2\%):} Requisitos vitais correspondentes à paridade funcional da Prova de Conceito (PoC) original (US2.01, US2.02 e US3.01), à criação, listagem e recuperação persistente de projetos (US1.01, US1.02 e US1.05) e à ativação dos controles de segurança, autenticação institucional e trava de horário letivo (US1.06, US1.07, US1.09, US1.10, US1.12 e US1.13).
-    \item \textbf{\textit{Should Have} (Deveria ter -- 6 histórias, 26,1\%):} Funcionalidades importantes de manutenção e organização do ciclo de vida dos registros (edição de título e exclusão de projetos em US1.03 e US1.04; revogação de e-mails e de janelas letivas em US1.08 e US1.11) e mecanismos essenciais de controle e correção pelo usuário (\textit{Human-in-the-Loop}: edição manual em US2.03 e reversão de turno em US2.04).
-    \item \textbf{\textit{Could Have} (Poderia ter -- 2 histórias, 8,7\%):} Funcionalidades desejáveis de apoio pedagógico e coleta complementar — exibição da justificativa metodológica por pergunta (US2.05) e avaliação individual de utilidade nos \textit{cards} de requisitos (US3.02) —, condicionadas à disponibilidade de cronograma após a entrega das prioridades superiores.
-    \item \textbf{\textit{Won't Have} (Não terá desta vez -- 3 histórias, 13,0\%):} Funcionalidades fora do escopo desta pesquisa, como estruturação de Requisitos Não Funcionais (US2.06), envio de mensagens por voz \textit{speech-to-text} (US2.07) e integração via API com plataformas externas como Jira, Trello e GitHub Projects (US3.03), documentadas exclusivamente para compor os trabalhos futuros.
+    \item \textbf{\textit{Must Have} (Deve ter, 12 histórias ou 52,2\%):} Requisitos vitais correspondentes à paridade funcional da Prova de Conceito (PoC) original (US2.01, US2.02 e US3.01), à criação, listagem e recuperação persistente de projetos (US1.01, US1.02 e US1.05) e à ativação dos controles de segurança, autenticação institucional e trava de horário letivo (US1.06, US1.07, US1.09, US1.10, US1.12 e US1.13).
+    \item \textbf{\textit{Should Have} (Deveria ter, 6 histórias ou 26,1\%):} Funcionalidades importantes de manutenção e organização do ciclo de vida dos registros (edição de título e exclusão de projetos em US1.03 e US1.04; revogação de e-mails e de janelas letivas em US1.08 e US1.11) e mecanismos essenciais de controle e correção pelo usuário (\textit{Human-in-the-Loop}: edição manual em US2.03 e reversão de turno em US2.04).
+    \item \textbf{\textit{Could Have} (Poderia ter, 2 histórias ou 8,7\%):} Funcionalidades desejáveis de apoio pedagógico e coleta complementar, abrangendo a exibição da justificativa metodológica por pergunta (US2.05) e a avaliação individual de utilidade nos \textit{cards} de requisitos (US3.02), condicionadas à disponibilidade de cronograma após a entrega das prioridades superiores.
+    \item \textbf{\textit{Won't Have} (Não terá desta vez, 3 histórias ou 13,0\%):} Funcionalidades fora do escopo desta pesquisa, como estruturação de Requisitos Não Funcionais (US2.06), envio de mensagens por voz \textit{speech-to-text} (US2.07) e integração via API com plataformas externas como Jira, Trello e GitHub Projects (US3.03), documentadas exclusivamente para compor os trabalhos futuros.
 \end{itemize}
 
 Com isso, encerrou-se formalmente a Fase 1 de diagnóstico e planejamento do projeto. Com as dimensões de infraestrutura, limites operacionais de \textit{tokens}, persistência de estado e necessidades iniciais de produto especificadas, os documentos produzidos serviram como diretriz operacional para a execução da Fase 2 de refatoração e desenvolvimento, detalhada na seção a seguir.
@@ -877,26 +877,26 @@ A execução da atividade A3.1 iniciou-se pela implementação das tarefas de in
 
 \subsubsection*{Infraestrutura Base, Persistência Transacional e Ambiente de \textit{Deploy} (T1.01 a T1.06)}
 
-Seguindo as diretrizes dos ADRs 01, 02 e 03, a aplicação foi reestruturada em uma arquitetura cliente-servidor desacoplada. O \textit{backend} foi construído em Python com o \textit{framework} assíncrono FastAPI (\textbf{T1.01}), organizado segundo os padrões \textit{Layered Architecture}, \textit{Repository} e \textit{Service Layer}, com validação estrita de entrada e saída via \textit{Schemas} Pydantic (\textbf{T1.06}). A persistência foi implementada no PostgreSQL 16 (\textbf{T1.02}) utilizando SQLAlchemy 2.0 assíncrono (\textit{driver} \texttt{asyncpg}) e migrações via Alembic, segmentando o ciclo de vida dos dados conforme a natureza de cada entidade:
+Seguindo as diretrizes dos ADRs 01, 02 e 03, a aplicação foi reestruturada em uma arquitetura cliente-servidor desacoplada. O \textit{backend} foi construído em Python com o \textit{framework} assíncrono FastAPI (\textbf{T1.01}), organizado segundo os padrões de Arquitetura em Camadas (\textit{Layered Architecture}), \textit{Repository} e \textit{Service Layer}, com validação estrita de contratos de entrada e saída via esquemas Pydantic (\textbf{T1.06}). A camada de persistência foi implementada no banco de dados relacional PostgreSQL 16 (\textbf{T1.02}) por meio do mapeamento objeto-relacional (ORM) assíncrono SQLAlchemy 2.0 e controle de migrações via Alembic, segmentando o ciclo de vida dos registros conforme a finalidade de cada entidade:
 
 \begin{itemize}
-    \item \textbf{Entidades de escopo e conversação (\texttt{Projeto}, \texttt{Mensagem} e artefatos):} operam sob exclusão lógica (\textit{soft delete} via \texttt{is\_ativo}) e bloqueio pessimista (\texttt{SELECT ... FOR UPDATE}) na geração de identificadores sequenciais, suportando a reversão transacional de turnos (\textit{undo});
-    \item \textbf{Controle de acesso (\texttt{EmailAutorizado}):} opera sob exclusão física (\textit{hard delete}), atuando como condição binária de autorização na \textit{whitelist};
-    \item \textbf{Entidades de telemetria e avaliação (\texttt{MetricaLLM} e \texttt{AvaliacaoRequisitoFuncional}):} modeladas como registros imutáveis (\textit{append-only}), com esta última preservando um \textit{snapshot} do requisito no instante da avaliação para garantir a integridade dos dados empíricos.
+    \item \textbf{Entidades de escopo e conversação (\texttt{Projeto}, \texttt{Mensagem} e artefatos):} operam sob exclusão lógica (\textit{soft delete}, via atributo \texttt{is\_ativo}) e bloqueio transacional pessimista na geração de identificadores sequenciais, suportando a reversão segura de turnos (\textit{undo});
+    \item \textbf{Entidade de controle de acesso (\texttt{EmailAutorizado}):} opera sob exclusão física (\textit{hard delete}), atuando como condição binária de autorização na lista de permissões (\textit{whitelist});
+    \item \textbf{Entidades de telemetria e avaliação (\texttt{MetricaLLM} e \texttt{AvaliacaoRequisitoFuncional}):} modeladas como registros imutáveis (\textit{append-only}), sendo que a entidade de avaliação preserva uma cópia estática (\textit{snapshot}) do requisito no instante do registro para assegurar a integridade dos dados empíricos.
 \end{itemize}
 
-Para evitar o esgotamento do \textit{pool} de conexões do banco de dados (\textit{Connection Starvation}) durante as chamadas à API do LLM (que demandam de 3 a 18 segundos de espera de rede), implementou-se o padrão transacional \textbf{\textit{Read-Release-Write}} em três etapas: (1) abertura de sessão rápida para leitura do contexto do projeto e registro do horário de envio, seguida de \texttt{commit} imediato para devolver a conexão ao \textit{pool}; (2) execução da chamada externa ao LLM sem reter recursos do PostgreSQL; e (3) abertura de nova transação rápida exclusivamente para persistir de forma atômica as mensagens do turno, as operações sobre artefatos e a telemetria.
+Para evitar o esgotamento do \textit{pool} de conexões do banco de dados (\textit{Connection Starvation}) durante as chamadas à API do LLM, que demandam de 3 a 18 segundos de espera de rede, foi implementado o padrão transacional \textbf{\textit{Read-Release-Write}} dividido em três etapas. Primeiramente, o \textit{backend} abre uma sessão rápida para leitura do contexto do projeto e registro do horário de envio, executando o \texttt{commit} imediato para devolver a conexão ao \textit{pool}. Em seguida, realiza a chamada externa ao modelo de linguagem sem reter recursos do PostgreSQL. Por fim, ao receber a resposta validada, abre uma nova transação rápida exclusivamente para persistir de forma atômica as mensagens do turno, as operações sobre artefatos e os dados de telemetria.
 
-Na camada de governança e observabilidade (\textbf{T1.04} e \textbf{T1.05}), implementou-se uma pilha de \textit{middlewares} na borda da API composta pelo \texttt{LogRequestsMiddleware} (integrado ao \textit{Loguru} para serializar eventos, latências e \textit{tracebacks} em JSON no arquivo \texttt{logs/app.log} com rotação de 10 MB e retenção de 15 dias) e pelo \texttt{ThrottlingMiddleware} (janela deslizante de 60 segundos em memória que limita cada usuário a 100 requisições/minuto globais e 10 requisições/minuto na rota da IA, retornando \texttt{HTTP 429}). Nas rotas de negócio, a autenticação via Microsoft Entra ID (OAuth2/OIDC com emissão de JWT interno) foi acoplada a dependências que validam a \textit{whitelist} e bloqueiam o acionamento do LLM fora das janelas letivas (\texttt{HTTP 403}).
+Na camada de governança e observabilidade (\textbf{T1.04} e \textbf{T1.05}), foi estruturada uma pilha de interceptadores (\textit{middlewares}) na borda da API. O primeiro módulo (\texttt{LogRequestsMiddleware}) foi integrado à biblioteca \textit{Loguru} para serializar eventos, latências e pilhas de erro (\textit{tracebacks}) em formato JSON, contando com rotação automática de 10 MB e retenção de 15 dias. O segundo módulo (\texttt{ThrottlingMiddleware}) aplica uma janela deslizante de 60 segundos em memória que limita cada usuário a 100 requisições por minuto nas rotas gerais e a 10 requisições por minuto na rota de acionamento da IA, retornando o código \texttt{HTTP 429} em caso de excesso. Nas rotas de negócio, a autenticação via Microsoft Entra ID (OAuth2/OIDC com emissão de JWT interno) foi associada a verificações de dependência que validam a presença do estudante na \textit{whitelist} e bloqueiam o acionamento do LLM fora das janelas letivas (\texttt{HTTP 403}).
 
-Para o \textit{deploy} (\textbf{T1.03}, ADR 04), o sistema foi conteinerizado via \textit{Docker} e \textit{Docker Compose} (isolando FastAPI/Uvicorn, Nginx e PostgreSQL) e disponibilizado sob subdomínio institucional do grupo de pesquisa com criptografia HTTPS (SSL/TLS).
+Para a implantação em produção (\textbf{T1.03}, ADR 04), o sistema foi conteinerizado por meio das ferramentas \textit{Docker} e \textit{Docker Compose}, isolando o servidor de aplicação (FastAPI/Uvicorn), o servidor web e \textit{proxy} reverso (Nginx) e o banco de dados (PostgreSQL), sendo disponibilizado sob subdomínio institucional do grupo de pesquisa com criptografia HTTPS (SSL/TLS).
 % O servidor institucional contou com a seguinte configuração: \textbf{[TODO: Inserir especificações do servidor institucional -- Processador/vCPUs, RAM, Armazenamento e SO]}.
 
 \subsubsection*{Evolução do Motor Conversacional e do \textit{System Prompt} (T2.01 a T2.10 e T1.07)}
 
-A implementação inicial do motor cognitivo (\textbf{T2.01} a \textbf{T2.04}) estabeleceu a \textbf{Arquitetura de Extração Direta (\texttt{v0.x})}, unificando diálogo e extração em uma única chamada ao \textit{Gemini 3.1 Flash-Lite}. Os testes funcionais dessa versão exigiram oito iterações sucessivas do \textit{System Prompt} (\texttt{v0.1} a \texttt{v0.8}) e a criação da tarefa emergente \textbf{T2.05} (\textit{Upsert} por correspondência de título) para estabilizar a decodificação JSON e evitar a duplicação de requisitos refinados ao longo da conversa.
+A implementação inicial do motor cognitivo (\textbf{T2.01} a \textbf{T2.04}) estabeleceu a \textbf{Arquitetura de Extração Direta (\texttt{v0.x})}, unificando a condução do diálogo e a extração de dados em uma chamada única ao modelo \textit{Gemini 3.1 Flash-Lite}. Os testes práticos dessa versão demandaram oito iterações sucessivas do \textit{System Prompt} (\texttt{v0.1} a \texttt{v0.8}) e a criação da tarefa emergente \textbf{T2.05} (atualização idempotente via \textit{Upsert} por correspondência de título) para estabilizar a decodificação da estrutura JSON e evitar a duplicação de requisitos refinados ao longo da conversa.
 
-Ao submeter a versão \texttt{v0.8} à validação de domínio junto ao professor orientador, identificou-se que o fluxo herdara uma característica estrutural da prova de conceito original: iniciar a conversa solicitando diretamente requisitos funcionais, sem antes modelar o problema e o domínio do projeto. Para alinhar a ferramenta ao ciclo real de uma entrevista consultiva de Engenharia de Requisitos, o motor foi reestruturado para a \textbf{Arquitetura Orientada a Estados (\texttt{v1.0})}, consolidada no \textit{prompt} \texttt{v1.0-orquestracao}. A Tabela \ref{tab:evolucao_prompts} sintetiza a evolução das versões do \textit{System Prompt}, cujos textos integrais encontram-se disponíveis no repositório oficial do projeto\footnote{Histórico completo das versões do \textit{System Prompt} disponível em: \url{https://github.com/CedisUnB/ElicitBot-v2/blob/main/docs/evolucao_system_prompts.md}.}.
+Ao submeter a versão \texttt{v0.8} à validação de domínio junto ao professor orientador, constatou-se que o fluxo conversacional ainda mantinha uma premissa estrutural da prova de conceito original: iniciar a interação solicitando diretamente requisitos funcionais, sem antes compreender e modelar o problema e o domínio do projeto. Para alinhar a ferramenta ao fluxo metodológico de uma entrevista real de elicitação, o motor foi reestruturado para a \textbf{Arquitetura Orientada a Estados (\texttt{v1.0})}, consolidada no \textit{prompt} \texttt{v1.0-orquestracao}. A Tabela \ref{tab:evolucao_prompts} sintetiza a evolução das versões do \textit{System Prompt}, cujos textos integrais encontram-se disponíveis no repositório oficial do projeto\footnote{Histórico completo das versões do \textit{System Prompt} disponível em: \url{https://github.com/CedisUnB/ElicitBot-v2/blob/main/docs/evolucao_system_prompts.md}.}.
 
 \noindent
 {
@@ -937,7 +937,7 @@ Ao submeter a versão \texttt{v0.8} à validação de domínio junto ao professo
 \end{xltabular}
 }
 
-A transição para a Arquitetura Orientada a Estados (\texttt{v1.0}) originou as tarefas técnicas emergentes \textbf{T2.06} a \textbf{T2.10} (além da previsão de indexação em \textbf{T1.07}), estruturando o processo conversacional em uma Máquina de Estados finita de 12 etapas dividida em dois macroblocos -- \textbf{Entendimento do Domínio} (Fases 1 a 6) e \textbf{Definição da Solução} (Fases 7 a 12) --, conforme ilustrado na Figura \ref{fig:fluxo_elicitacao}.
+A transição para a Arquitetura Orientada a Estados (\texttt{v1.0}) deu origem às tarefas técnicas emergentes \textbf{T2.06} a \textbf{T2.10}, além da previsão preventiva de indexação em \textbf{T1.07}. Nessa modelagem, o processo conversacional foi estruturado em uma Máquina de Estados finita de 12 etapas, conforme ilustrado na Figura \ref{fig:fluxo_elicitacao}.
 
 \begin{figure}[H]
     \centering
@@ -949,13 +949,13 @@ A transição para a Arquitetura Orientada a Estados (\texttt{v1.0}) originou as
     \small Fonte: Elaborada pelo autor.
 \end{figure}
 
-Para sustentar o fluxo representado na Figura \ref{fig:fluxo_elicitacao}, a arquitetura \texttt{v1.0} implementou quatro mecanismos integrados no \textit{backend}:
+Para sustentar o fluxo representado na Figura \ref{fig:fluxo_elicitacao}, a arquitetura \texttt{v1.0} incorporou quatro mecanismos integrados no \textit{backend}:
 
 \begin{enumerate}
-    \item \textbf{Controle de Transição e Defesa de Escopo (T2.06):} Persistido na entidade \texttt{EstadoInteracao}, o fluxo aplica três regras: (i) \textit{Trava de Confirmação (Gatekeeper)}, que bloqueia o avanço de fase enquanto existirem artefatos pendentes (\texttt{aguardando\_confirmacao}); (ii) \textit{Defesa do Escopo}, que estaciona pedidos prematuros de funcionalidades na fila \texttt{topicos\_em\_espera} e reconduz o diálogo à fase atual; e (iii) \textit{Manutenção Retroativa}, permitindo atualizar ou descartar artefatos de etapas passadas sem retroceder o ponteiro da fase vigente.
-    \item \textbf{Gerenciamento Bipartido de Memória (T2.07):} O módulo \texttt{prompt\_builder.py} substituiu a sumarização textual (T2.03) pela divisão determinística do estado do banco: a \textbf{Memória Estável} reúne o \textit{System Prompt} e os artefatos já \texttt{confirmados} de fases estabilizadas (registrada no \textit{Context Caching} da Vertex AI com desconto de 90\% e invalidação por \textit{hash} SHA-256), enquanto a \textbf{Memória Dinâmica} envia fora do \textit{cache} os artefatos da fase em foco, lacunas e a janela deslizante das últimas 20 mensagens (10 turnos).
-    \item \textbf{Motor de Operações e Ciclo de Vida de Artefatos (T2.08):} O módulo \texttt{motor\_operacoes.py} substituiu o \textit{Upsert} por título (T2.05) por cinco comandos explícitos (\texttt{criar}, \texttt{atualizar}, \texttt{confirmar}, \texttt{validar} e \texttt{descartar}) sobre oito tipos de artefatos identificados por \textit{Tags} sequenciais imutáveis (\texttt{CTX}, \texttt{PROB}, \texttt{ENV}, \texttt{NEC}, \texttt{OBJ}, \texttt{RES}, \texttt{SOL} e \texttt{RF}), gerenciando a transição entre os status \texttt{aguardando\_confirmacao}, \texttt{confirmado} e \texttt{descartado}.
-    \item \textbf{Dupla Validação de Requisitos Funcionais (T2.09):} Na Fase 11, os Requisitos Funcionais possuem um ciclo de validação adicional (\texttt{status\_validacao}: \texttt{nao\_validado} $\rightarrow$ \texttt{aprovado\_pelo\_backend} $\rightarrow$ \texttt{aprovado} ou \texttt{com\_pendencias}). O módulo \texttt{validar\_requisitos.py} audita deterministicamente a integridade dos vínculos, a existência de origem mínima, a cobertura de necessidades e duplicidades lexicais antes de liberar o requisito para a validação semântica da IA.
+    \item \textbf{Controle de Transição e Defesa de Escopo (T2.06):} Persistido na entidade \texttt{EstadoInteracao}, o fluxo aplica a regra de \textit{Trava de Confirmação (Gatekeeper)}, que bloqueia o avanço de fase enquanto existirem artefatos pendentes de aceite pelo usuário (\texttt{aguardando\_confirmacao}). Adicionalmente, opera a regra de \textit{Defesa do Escopo}, que armazena pedidos prematuros de funcionalidades na fila \texttt{topicos\_em\_espera} e reconduz o diálogo à fase atual, bem como o suporte à \textit{Manutenção Retroativa}, permitindo atualizar ou descartar artefatos de etapas passadas sem retroceder o ponteiro da fase vigente.
+    \item \textbf{Gerenciamento Bipartido de Memória (T2.07):} O módulo construtor de contexto substituiu a sumarização textual (T2.03) pela divisão determinística do estado do banco de dados. A \textbf{Memória Estável} reúne o \textit{System Prompt} e os artefatos já \texttt{confirmados} de fases estabilizadas, sendo registrada no \textit{Context Caching} da Vertex AI com desconto de 90\% e invalidação controlada por \textit{hash} SHA-256. Por sua vez, a \textbf{Memória Dinâmica} envia fora do \textit{cache} os artefatos da fase em foco, as lacunas abertas e a janela deslizante das últimas 20 mensagens (10 turnos).
+    \item \textbf{Motor de Operações e Ciclo de Vida de Artefatos (T2.08):} O Motor de Operações substituiu a rotina de \textit{Upsert} por título (T2.05) por cinco comandos explícitos (\texttt{criar}, \texttt{atualizar}, \texttt{confirmar}, \texttt{validar} e \texttt{descartar}) aplicados sobre oito tipos de artefatos identificados por \textit{Tags} sequenciais imutáveis (\texttt{CTX}, \texttt{PROB}, \texttt{ENV}, \texttt{NEC}, \texttt{OBJ}, \texttt{RES}, \texttt{SOL} e \texttt{RF}), gerenciando a transição entre os estados \texttt{aguardando\_confirmacao}, \texttt{confirmado} e \texttt{descartado}.
+    \item \textbf{Dupla Validação de Requisitos Funcionais (T2.09):} Na Fase 11, os Requisitos Funcionais possuem um ciclo de validação adicional (\texttt{status\_validacao}: \texttt{nao\_validado} $\rightarrow$ \texttt{aprovado\_pelo\_backend} $\rightarrow$ \texttt{aprovado} ou \texttt{com\_pendencias}). O módulo de validação determinística do servidor audita a integridade dos vínculos, a existência de origem mínima, a cobertura de necessidades e a ausência de duplicidades lexicais antes de liberar o requisito para a validação semântica da IA.
 \end{enumerate}
 
 A Tabela \ref{tab:backlog_tecnico_emergente} consolida os sete requisitos técnicos emergentes mapeados na Fase 2.
@@ -1005,38 +1005,38 @@ A Tabela \ref{tab:backlog_tecnico_emergente} consolida os sete requisitos técni
     \textbullet~Instanciação automática de \texttt{EstadoInteracao} na criação do projeto. \newline
     \textbullet~Retorno de fase atual, foco, lacunas e próxima ação no JSON da IA. \newline
     \textbullet~Suporte a edição retroativa sem retorno de fase. & 
-    Implementada (Arquitetura \texttt{v1.0}) \\
+    Implementada na \texttt{v1.0} \\
     \midrule
     T2.07 & Gerenciamento Bipartido de Memória (Estável e Dinâmica) & Substituir a sumarização em \textit{background} (T2.03) por um construtor de contexto (\texttt{prompt\_builder}) que divide os artefatos do banco conforme o grau de estabilidade. & 
     \textbullet~\textit{Memória Estável}: artefatos \texttt{confirmados} de fases anteriores injetados no \textit{Context Caching}. \newline
     \textbullet~\textit{Memória Dinâmica}: artefatos da fase atual ou pendentes fora do \textit{cache}. \newline
     \textbullet~Composição unificada enviada a cada turno sem duplicação. & 
-    Implementada (Arquitetura \texttt{v1.0} -- substituiu T2.03) \\
+    Implementada na \texttt{v1.0} (substituiu T2.03) \\
     \midrule
     T2.08 & Motor de Operações e Ciclo de Vida dos Artefatos & Substituir o \textit{Upsert} por título (T2.05) por um Motor de Operações baseado em \textit{Tags} imutáveis, orquestrando 8 tipos de artefatos por meio de 5 comandos explícitos (\texttt{criar}, \texttt{atualizar}, \texttt{confirmar}, \texttt{validar} e \texttt{descartar}). & 
     \textbullet~Mapeamento e execução transacional das 5 operações via SQLAlchemy. \newline
     \textbullet~Tratamento isolado de validação de esquemas via Pydantic. \newline
     \textbullet~Resolução nativa de relacionamentos cruzados via \textit{Tags}. & 
-    Implementada (Arquitetura \texttt{v1.0} -- substituiu T2.05) \\
+    Implementada na \texttt{v1.0} (substituiu T2.05) \\
     \midrule
     T2.09 & Pré-Validação Determinística de Requisitos Funcionais & Implementar camada de verificação determinística no \textit{backend} (Fase 11) para auditar integridade de vínculos, origens mínimas e duplicidades antes da validação semântica da IA. & 
     \textbullet~Bloqueio de validação de RFs com vínculos inválidos ou não confirmados. \newline
     \textbullet~Registro automático de \texttt{pendencias\_validacao} no RF. \newline
     \textbullet~Interação guiada pela IA para sanar falhas de rastreabilidade. & 
-    Implementada (Arquitetura \texttt{v1.0}) \\
+    Implementada na \texttt{v1.0} \\
     \midrule
     T2.10 & Adequação do \textit{System Prompt} à Arquitetura Orientada a Estados & Consolidar o \textit{System Prompt} (\texttt{v1.0-orquestracao}) como contrato comportamental estrito alinhado às 12 fases da Máquina de Estados e às 5 ações do Motor de Operações. & 
     \textbullet~Descrição explícita das 12 fases e dos 8 artefatos. \newline
     \textbullet~Exigência de \textit{Tags} imutáveis como identificadores. \newline
     \textbullet~Regras de manutenção retroativa e proibição de inferências não validadas. & 
-    Implementada (Arquitetura \texttt{v1.0}) \\
+    Implementada na \texttt{v1.0} \\
 \end{xltabular}
 }
 
 \subsection{(A3.2) Desenvolvimento das melhorias funcionais priorizadas}
 \label{subsec:exec_a32}
 
-Paralelamente à evolução do \textit{backend}, a atividade A3.2 executou o desenvolvimento da interface em React (TypeScript e Tailwind CSS) e das rotas previstas no \textit{Backlog} Funcional inicial (Tabela \ref{tab:backlog_funcional}). Foram implementadas integralmente todas as 18 Histórias de Usuário classificadas como \textit{Must Have} e \textit{Should Have} (\textbf{US1.01} a \textbf{US1.13}, \textbf{US2.01} a \textbf{US2.04} e \textbf{US3.01}), além da funcionalidade \textit{Could Have} de avaliação individual de Requisitos Funcionais (\textbf{US3.02}). As três histórias \textit{Won't Have} (\textbf{US2.06}, \textbf{US2.07} e \textbf{US3.03}) permaneceram fora do escopo conforme planejado, e o esforço da história \textit{Could Have} \textbf{US2.05} foi realocado para a entrega de sete Histórias de Usuário emergentes (Tabela \ref{tab:backlog_funcional_emergente}), necessárias para expor na interface a Máquina de Estados de 12 etapas, os oito tipos de artefatos e as ferramentas de governança e observabilidade.
+Paralelamente à evolução do \textit{backend}, a atividade A3.2 executou o desenvolvimento da interface de usuário em React (utilizando TypeScript e Tailwind CSS) e das rotas previstas no \textit{Backlog} Funcional inicial (Tabela \ref{tab:backlog_funcional}). Foram implementadas integralmente todas as 18 Histórias de Usuário classificadas como \textit{Must Have} e \textit{Should Have} (\textbf{US1.01} a \textbf{US1.13}, \textbf{US2.01} a \textbf{US2.04} e \textbf{US3.01}), além da funcionalidade \textit{Could Have} voltada à avaliação individual de utilidade de Requisitos Funcionais (\textbf{US3.02}). As três histórias classificadas como \textit{Won't Have} (\textbf{US2.06}, \textbf{US2.07} e \textbf{US3.03}) permaneceram fora do escopo conforme planejado, enquanto o esforço da história \textit{Could Have} \textbf{US2.05} foi realocado para priorizar a entrega de sete Histórias de Usuário emergentes (Tabela \ref{tab:backlog_funcional_emergente}), essenciais para disponibilizar na interface a Máquina de Estados de 12 etapas, a visualização dos oito tipos de artefatos e os recursos de governança e observabilidade.
 
 \noindent
 {
@@ -1100,9 +1100,8 @@ Paralelamente à evolução do \textit{backend}, a atividade A3.2 executou o des
     \textit{Should Have} & Emergente (Monitoramento / ADR 04) \\
 \end{xltabular}
 }
-\footnotetext{A especificação integral dos critérios de aceitação de todas as Histórias de Usuário encontra-se disponível no repositório do projeto em: \url{https://github.com/CedisUnB/ElicitBot-v2/blob/main/docs/backlog_funcional.md}.}
 
-A Figura \ref{fig:tela_chat} apresenta a área de trabalho em painel duplo resultante da integração entre as histórias iniciais (\textbf{US2.01}, \textbf{US2.02}, \textbf{US2.04} e \textbf{US3.01}) e emergentes (\textbf{US2.11} e \textbf{US2.12}). À esquerda, a barra lateral reativa (\texttt{SidebarArtefatos}) indica a etapa vigente da Máquina de Estados (\texttt{Envolvidos}), agrupa em abas expansíveis as oito categorias de artefatos com seus respectivos contadores e disponibiliza o botão ``Exportar Escopo'' para geração do Documento de Requisitos de Software (DRS) nos formatos PDF, Markdown e JSON. À direita, o painel conversacional conduz a entrevista, demonstrando na prática a manutenção retroativa de artefatos de fases anteriores (\texttt{PROB-02} e \texttt{Contexto}) simultaneamente à transição para a fase de \texttt{Envolvidos}, além de disponibilizar o controle de reversão de turno (``Desfazer'').
+A Figura \ref{fig:tela_chat} apresenta a área de trabalho em painel duplo resultante da integração entre as histórias iniciais (\textbf{US2.01}, \textbf{US2.02}, \textbf{US2.04} e \textbf{US3.01}) e emergentes (\textbf{US2.11} e \textbf{US2.12}). À esquerda, a barra lateral reativa indica a etapa vigente da Máquina de Estados (\texttt{Envolvidos}), agrupa em abas expansíveis as oito categorias de artefatos com seus respectivos contadores e disponibiliza o botão ``Exportar Escopo'' para geração do Documento de Requisitos de Software (DRS) nos formatos PDF, Markdown e JSON. À direita, o painel conversacional conduz a entrevista, demonstrando na prática a manutenção retroativa de artefatos de fases anteriores (\texttt{PROB-02} e \texttt{Contexto}) simultaneamente à transição para a fase de \texttt{Envolvidos}, além de disponibilizar o controle de reversão de turno (``Desfazer'').
 
 \begin{figure}[H]
     \centering
@@ -1114,7 +1113,7 @@ A Figura \ref{fig:tela_chat} apresenta a área de trabalho em painel duplo resul
     \small Fonte: Elaborada pelo autor.
 \end{figure}
 
-Complementando a experiência do estudante, a Figura \ref{fig:telas_dashboard_modal} apresenta, em (a), o painel principal (\textit{Dashboard}) de gerenciamento de sessões (\textbf{US1.01} a \textbf{US1.05}) e, em (b), o modal de inspeção detalhada de artefato (\texttt{ModalArtefato}), acionado ao clicar sobre um item da barra lateral (ilustrado pelo artefato \texttt{PROB-02}), o qual materializa o controle \textit{Human-in-the-Loop} (\textbf{US2.03}) ao permitir a visualização estruturada e a edição manual de qualquer atributo, bem como a avaliação de utilidade quando aplicado a Requisitos Funcionais (\textbf{US3.02}).
+Complementando a experiência do estudante, a Figura \ref{fig:telas_dashboard_modal} apresenta, em (a), o painel principal (\textit{Dashboard}) de gerenciamento de sessões (\textbf{US1.01} a \textbf{US1.05}) e, em (b), o modal de inspeção detalhada de artefato, acionado ao selecionar um item da barra lateral (ilustrado pelo artefato \texttt{PROB-02}). Esse componente materializa o controle \textit{Human-in-the-Loop} (\textbf{US2.03}) ao permitir a visualização estruturada e a edição manual de qualquer atributo, bem como a avaliação individual de utilidade quando aplicado a Requisitos Funcionais (\textbf{US3.02}).
 
 \begin{figure}[H]
     \centering
@@ -1135,7 +1134,7 @@ Complementando a experiência do estudante, a Figura \ref{fig:telas_dashboard_mo
     \small Fonte: Elaborada pelo autor.
 \end{figure}
 
-Por fim, a Figura \ref{fig:tela_admin} ilustra o Painel de Administração dividido em suas duas seções operacionais: em (a), os módulos de gerenciamento da \textit{Whitelist} de e-mails e das janelas de horário letivo (\textbf{US1.06} a \textbf{US1.11}), o botão de exportação de telemetria em CSV (\textbf{US3.04}) e o painel de governança e ativação dinâmica de versões do \textit{System Prompt} (\textit{LLMOps} -- \textbf{US2.08} a \textbf{US2.10}); e, em (b), o Console do Servidor para monitoramento em tempo real das últimas 500 linhas de \textit{log}, filtro de alertas e inspeção de exceções sem necessidade de acesso SSH (\textbf{US3.05}).
+Por fim, a Figura \ref{fig:tela_admin} ilustra o Painel de Administração dividido em suas duas seções operacionais: em (a), os módulos de gerenciamento da \textit{Whitelist} de e-mails e das janelas de horário letivo (\textbf{US1.06} a \textbf{US1.11}), o botão de exportação de telemetria em CSV (\textbf{US3.04}) e o painel de governança e ativação dinâmica de versões do \textit{System Prompt} (\textit{LLMOps}, \textbf{US2.08} a \textbf{US2.10}); e, em (b), o Console do Servidor para monitoramento em tempo real das últimas 500 linhas de \textit{log}, filtro de alertas e inspeção de exceções sem necessidade de acesso SSH (\textbf{US3.05}).
 
 \begin{figure}[H]
     \centering
@@ -1159,9 +1158,9 @@ Por fim, a Figura \ref{fig:tela_admin} ilustra o Painel de Administração divid
 \subsection{(A3.3) Execução de testes técnicos para validação de estabilidade estrutural}
 \label{subsec:exec_a33}
 
-A atividade A3.3 validou a estabilidade estrutural e a escalabilidade da Arquitetura Orientada a Estados (\texttt{v1.0}) via injeção automatizada de tráfego com a ferramenta \textit{Locust}, verificando o suporte a até 50 usuários simultâneos sem esgotamento de conexões no banco de dados. Os testes foram executados na estação de desenvolvimento (Intel Core i5-13400F, 16 GB RAM DDR4, SSD 256 GB, Ubuntu/WSL2 e Docker Engine) comunicando-se via rede externa com a API real da Google Vertex AI. Os contêineres replicaram os parâmetros de produção: PostgreSQL 16 com \texttt{max\_connections = 300}; FastAPI/Uvicorn com 4 \textit{workers} (\texttt{pool\_size = 30} e \texttt{max\_overflow = 20} por \textit{worker}, suportando até 200 conexões simultâneas); e Nginx/Axios com \texttt{timeout} de 120 segundos. Utilizou-se um \textit{Token} JWT pré-gerado e desativou-se temporariamente o \textit{throttling} por usuário para estressar diretamente o núcleo do sistema.
+A atividade A3.3 validou a estabilidade estrutural e a escalabilidade da Arquitetura Orientada a Estados (\texttt{v1.0}) por meio de testes automatizados de carga com a ferramenta \textit{Locust}, verificando o suporte a até 50 usuários simultâneos sem esgotamento de conexões no banco de dados. Os testes foram executados na estação de desenvolvimento (processador Intel Core i5-13400F, 16 GB de memória RAM DDR4 e unidade SSD SATA de 256 GB, operando sob ambiente Linux Ubuntu via WSL2 e Docker Engine) comunicando-se via rede externa com a API real da Google Vertex AI. Os contêineres replicaram os parâmetros de produção: PostgreSQL 16 configurado com \texttt{max\_connections = 300}; FastAPI/Uvicorn com 4 processos (\textit{workers}) paralelos (\texttt{pool\_size = 30} e \texttt{max\_overflow = 20} por processo, totalizando capacidade para até 200 conexões simultâneas); e tempo limite (\texttt{timeout}) de leitura no Nginx e no cliente HTTP ajustado para 120 segundos. Utilizou-se um \textit{Token} JWT pré-gerado e desativou-se temporariamente o limite de taxa por usuário para estressar diretamente o núcleo do sistema.
 
-Na \textbf{Bateria 1 (\textit{Step Load Testing})}, a carga foi escalada em degraus de \textbf{5, 10, 20, 35, 50 e 100 usuários virtuais simultâneos} (30 segundos por patamar), submetendo mensagens complexas com retorno JSON estruturado (Figura \ref{fig:locust_step_load}). Nos patamares de \textbf{5 a 50 usuários} (alvo pedagógico do projeto), a taxa de falhas foi de \textbf{0\%}, com tempo de resposta estável entre \textbf{3.000 ms e 8.000 ms} e curva P95 horizontal, comprovando a eficácia do padrão \textit{Read-Release-Write}. No degrau extremo de \textbf{100 usuários} (~10 RPS), registraram-se recusas decorrentes exclusivamente do limite de taxa contratual (\textit{Rate Limit}) da conta utilizada na Vertex AI, as quais foram interceptadas pelo \textit{backend} com retorno controlado de \texttt{HTTP 503 (Service Unavailable)}, sem queda do servidor ou corrupção de estado.
+Na \textbf{Bateria 1 (\textit{Step Load Testing})}, a carga foi escalada progressivamente nos patamares de \textbf{5, 10, 20, 35, 50 e 100 usuários virtuais simultâneos} (com duração de 30 segundos por degrau), submetendo mensagens complexas com retorno JSON estruturado (Figura \ref{fig:locust_step_load}). Nos patamares de \textbf{5 a 50 usuários} (alvo pedagógico do projeto), a taxa de falhas manteve-se em \textbf{0\%}, com tempo de resposta estável entre \textbf{3.000 ms e 8.000 ms} e curva do percentil 95 (P95) horizontal, comprovando a eficácia do padrão \textit{Read-Release-Write}. No degrau extremo de \textbf{100 usuários} (vazão aproximada de 10 requisições por segundo), registraram-se recusas decorrentes exclusivamente do limite de taxa contratual (\textit{Rate Limit}) da conta utilizada na Vertex AI, as quais foram interceptadas pelo \textit{backend} com retorno controlado de erro (\texttt{HTTP 503 Service Unavailable}), sem queda do servidor ou corrupção de estado.
 
 \begin{figure}[H]
     \centering
@@ -1173,7 +1172,7 @@ Na \textbf{Bateria 1 (\textit{Step Load Testing})}, a carga foi escalada em degr
     \small Fonte: Elaborada pelo autor via interface do \textit{Locust}.
 \end{figure}
 
-Na \textbf{Bateria 2 (\textit{Soak Testing})}, sustentou-se a carga constante de \textbf{50 usuários simultâneos durante 10 minutos ininterruptos} (Figura \ref{fig:locust_soak_test}). Cada usuário virtual operou como uma Máquina de Estados executando cinco turnos consecutivos de elicitação seguidos do acionamento regressivo da rota ``Desfazer Turno'' (\textit{soft delete} em cascata) até zerar o projeto. O sistema manteve \textbf{0\% de erros} durante todo o período, alternando entre \textbf{6.000 ms e 18.000 ms} (P95) nas chamadas externas à Vertex AI e latência na \textbf{ordem de poucos milissegundos} nas deleções relacionais em cascata no PostgreSQL -- atestando a ausência de vazamentos de memória (\textit{Memory Leaks}) e confirmando a desnecessidade de índices compostos extras (\textbf{T1.07}) considerando a escala do projeto.
+Na \textbf{Bateria 2 (\textit{Soak Testing})}, sustentou-se a carga constante de \textbf{50 usuários simultâneos durante 10 minutos ininterruptos} (Figura \ref{fig:locust_soak_test}). Cada usuário virtual operou como uma Máquina de Estados Finita, executando cinco turnos consecutivos de elicitação seguidos do acionamento regressivo da rota ``Desfazer Turno'' (\textit{soft delete} em cascata) até retornar o projeto ao estado inicial. O sistema manteve \textbf{0\% de erros} durante todo o período, alternando entre \textbf{4.000 ms e 18.000 ms} (P95) nas chamadas externas à Vertex AI e latência na \textbf{ordem de poucos milissegundos} nas deleções relacionais em cascata no PostgreSQL. Esse comportamento atestou a ausência de vazamentos de memória (\textit{Memory Leaks}) e confirmou que a criação de índices compostos adicionais (\textbf{T1.07}) não seria necessária para a escala do projeto.
 
 \begin{figure}[H]
     \centering
@@ -1193,43 +1192,183 @@ Concluídos os testes de estabilidade estrutural na Fase 2, a pesquisa avançou 
 \subsection{(A4.1) Implantação e aplicação do sistema em sala de aula}
 \label{subsec:exec_a41}
 
-A atividade A4.1 consistiu na execução presencial do Teste de Aceitação do Usuário (UAT) em duas turmas da disciplina de Requisitos de Software da Universidade de Brasília (UnB -- Campus Gama / FCTE). Antes do início das sessões, que ocorreram no dia 22 de outubro de 2026, os e-mails institucionais (\texttt{@aluno.unb.br}) dos líderes de cada equipe foram previamente cadastrados na \textit{Whitelist} da plataforma (\textbf{US1.06}), e as janelas de horário letivo correspondentes aos turnos das aulas foram ativadas no Painel de Administração (\textbf{US1.09}). A distribuição do efetivo participante nas duas sessões ocorreu da seguinte forma:
+A atividade A4.1 consistiu na execução presencial do Teste de Aceitação do Usuário (UAT) em duas turmas da disciplina de Requisitos de Software da Universidade de Brasília (UnB, Campus Gama / FCTE). Antes do início das sessões, que ocorreram no dia 22 de outubro de 2026, os e-mails institucionais (\texttt{@aluno.unb.br}) dos líderes de cada equipe foram previamente cadastrados na \textit{Whitelist} da plataforma (\textbf{US1.06}), e as janelas de horário letivo correspondentes aos turnos das aulas foram ativadas no Painel de Administração (\textbf{US1.09}). A distribuição dos estudantes nas duas sessões ocorreu da seguinte forma:
 
 \begin{itemize}
-    \item \textbf{Turma 1 (~08h20 às ~09h50):} Dos 44 estudantes matriculados, 38 estiveram presentes em laboratório (86,4\% de presença), organizados em 7 equipes de projeto.
-    \item \textbf{Turma 2 (~10h20 às ~11h50):} Dos 45 estudantes matriculados, 40 estiveram presentes em laboratório (88,9\% de presença), organizados em 7 equipes de projeto.
+    \item \textbf{Turma 1 (das 08h00 às 09h50):} Dos 44 estudantes matriculados, 38 estiveram presentes em laboratório (86,4\% de presença), organizados em 7 equipes de projeto.
+    \item \textbf{Turma 2 (das 10h00 às 11h50):} Dos 45 estudantes matriculados, 40 estiveram presentes em laboratório (88,9\% de presença), organizados em 7 equipes de projeto.
 \end{itemize}
 
-No total, a validação em campo contou com a participação presencial de \textbf{78 estudantes distribuídos em 14 equipes ativas} simultaneamente. Conforme o protocolo metodológico estabelecido na Seção \ref{sec:fase3}, cada equipe utilizou como base o escopo real de seu projeto semestral da disciplina -- cujo levantamento tradicional de requisitos já havia sido elaborado previamente pelo grupo --, interagindo com o ElicitBot em regime de revezamento de operador a cada fase da Máquina de Estados, enquanto os demais integrantes discutiam coletivamente as perguntas do assistente e inspecionavam os artefatos gerados na barra lateral.
+No total, a validação em campo contou com a participação presencial de \textbf{78 estudantes distribuídos em 14 equipes ativas} simultaneamente. Conforme o protocolo metodológico estabelecido na Seção \ref{sec:fase3}, cada equipe utilizou como base o escopo real de seu projeto semestral da disciplina, cujo levantamento tradicional de requisitos já havia sido elaborado previamente pelo grupo. Durante a sessão, os estudantes interagiram com o ElicitBot em regime de revezamento de operador a cada fase da Máquina de Estados, enquanto os demais integrantes discutiam coletivamente as perguntas do assistente e inspecionavam os artefatos gerados na barra lateral.
 
 \subsection{(A4.2) Coleta de métricas de uso e aplicação do questionário de avaliação}
 \label{subsec:exec_a42}
 
 Durante as duas sessões presenciais, o comportamento operacional do servidor foi acompanhado em tempo real por meio do Console do Servidor no Painel de Administração (\textbf{US3.05}). Paralelamente, o sistema persistiu no PostgreSQL o histórico completo de mensagens, o estado de progressão das equipes nos 14 projetos instanciados, os artefatos extraídos nas oito categorias de domínio e os registros de telemetria de cada chamada à API na entidade \texttt{MetricaLLM}, posteriormente exportados em formato CSV (\textbf{US3.04}).
 
-Ao término da atividade prática em laboratório, disponibilizou-se o Questionário de Avaliação Estruturado para preenchimento individual e assíncrono pelos estudantes que participaram da dinâmica. O instrumento foi composto por 32 variáveis distribuídas em três blocos: (i) uma questão fechada de controle de funil, identificando a etapa máxima da Máquina de Estados alcançada pela equipe durante a aula; (ii) 20 afirmações avaliativas em escala Likert de 5 pontos (\texttt{1 = Discordo Totalmente} a \texttt{5 = Concordo Totalmente}), organizadas em cinco dimensões analíticas (D1 a D5); e (iii) 10 questões abertas opcionais voltadas ao relato de incongruências semânticas, falhas de interface ou estado e sugestões de evolução.
+Ao término da atividade prática em laboratório, foi disponibilizado o Questionário de Avaliação Estruturado para preenchimento individual e assíncrono pelos estudantes que participaram da dinâmica. O instrumento foi composto por 32 variáveis distribuídas em três partes: uma questão fechada de controle de funil para identificar a etapa máxima da Máquina de Estados alcançada pela equipe durante a aula; 20 afirmações avaliativas em escala Likert de 5 pontos (\texttt{1 = Discordo Totalmente} a \texttt{5 = Concordo Totalmente}); e 10 questões abertas opcionais voltadas ao relato de incongruências semânticas, falhas de interface ou estado e sugestões de evolução.
 
-Dos 78 estudantes presentes nas duas turmas, obtiveram-se \textbf{$N = 65$ respostas individuais válidas}, correspondendo a uma taxa de retorno amostral de \textbf{83,3\%}. Para assegurar a privacidade dos participantes e permitir a rastreabilidade cruzada na pesquisa, os respondentes foram anonimizados sob os identificadores sequenciais \texttt{[P1]} a \texttt{[P65]}. A base de dados e o instrumento completo aplicado encontram-se disponíveis no repositório oficial do projeto\footnote{Instrumento de coleta e planilha de respostas disponíveis em: \url{https://github.com/CedisUnB/ElicitBot-v2/tree/main/docs/evaluation}.}.
+Dos 78 estudantes presentes nas duas turmas, foram obtidas \textbf{$N = 65$ respostas individuais válidas}, correspondendo a uma taxa de retorno amostral de \textbf{83,3\%}. Para assegurar a privacidade dos participantes e permitir a rastreabilidade cruzada na pesquisa, os respondentes foram anonimizados sob os identificadores sequenciais \texttt{[P1]} a \texttt{[P65]}. A base de dados e o instrumento completo aplicado encontram-se disponíveis no repositório oficial do projeto\footnote{Instrumento de coleta e planilha de respostas disponíveis em: \url{https://github.com/CedisUnB/ElicitBot-v2/tree/main/docs/evaluation}.}.
 
 \subsection{(A4.3) Análise qualitativa dos relatos e sistematização do plano de ação}
 \label{subsec:exec_a43}
 
-Na atividade A4.3, as respostas submetidas nos 10 campos abertos do formulário pelos 65 estudantes participantes foram processadas por meio de Triagem Técnica de Incidentes e Categorização Indutiva de Relatos. Os apontamentos foram consolidados em 18 tópicos temáticos e classificados em três categorias de encaminhamento, cujo mapeamento integral — contendo a descrição detalhada, a frequência de ocorrência ($f$), a rastreabilidade nominal aos identificadores dos respondentes (\texttt{[P1]} a \texttt{[P65]}) e o plano de ação ou justificativa técnica — encontra-se documentado no Apêndice \ref{apendice:triagem_qualitativa}:
+Na atividade A4.3, as respostas submetidas nos 10 campos abertos do formulário pelos 65 estudantes participantes foram processadas por meio de Triagem Técnica de Incidentes e Categorização Indutiva de Relatos. Os apontamentos foram consolidados em 18 tópicos temáticos e classificados em três categorias de encaminhamento. O mapeamento integral dessa análise, contendo a descrição detalhada, a frequência de ocorrência ($f$), a rastreabilidade aos identificadores dos respondentes (\texttt{[P1]} a \texttt{[P65]}) e o respectivo plano de ação ou justificativa técnica, encontra-se documentado no Apêndice \ref{apendice:triagem_qualitativa}.
 
 \begin{itemize}
-    \item \textbf{Categoria 1 -- Correções Imediatas (\texttt{CI-01} a \texttt{CI-04}):} Reúne os gargalos de usabilidade (fricções de UX) na interface atual e as falhas sistêmicas ou de sincronização de estado com impacto direto na integridade do projeto elicitado. Foram mapeados quatro pontos prioritários: (i) limitações de usabilidade no componente de entrada de dados, como ausência de redimensionamento vertical, perda de foco do cursor e falta de atalho para quebra de linha (\texttt{CI-01}, $f = 22$ relatos); (ii) falha de concorrência na Fase 11 (\texttt{Validação de Requisitos}), quando o agente tentava atualizar um requisito e submetê-lo à validação no mesmo turno, ou alterar simultaneamente o atributo de pendências junto a outros dados do artefato, além da falta de mensagens de erro claras (\texttt{CI-02}, $f = 14$ relatos); (iii) fricções de navegação por ausência de rolagem automática no \textit{chat} e fechamento de modais restrito ao botão ``X'' (\texttt{CI-03}, $f = 5$ relatos); e (iv) casos pontuais de duplicação semântica na geração de artefatos ou menção no diálogo a \textit{Tags} já excluídas manualmente (\texttt{CI-04}, $f = 5$ relatos).
-    \item \textbf{Categoria 2 -- Limitações Aceitáveis e Delimitação de Escopo (\texttt{LA-01} a \texttt{LA-07}):} Agrupa comportamentos derivados de decisões metodológicas e pedagógicas da pesquisa - que não devem ser removidos sob pena de invalidar a engenharia de \textit{prompt} proposta - e variações inerentes à natureza probabilística de LLMs já mitigadas pela arquitetura \textit{Human-in-the-Loop}. Esta categoria abrangeu sete aspectos: (i) uso da edição manual na barra lateral para refinar artefatos ou ajustar títulos genéricos definidos na criação do projeto (\texttt{LA-01}, $f = 12$ relatos); (ii) concisão dos artefatos e da granularidade do MVP, evitando extrapolações não fornecidas pelo aluno (\texttt{LA-02}, $f = 7$ relatos); (iii) variações não determinísticas pontuais de atenção e rigor nas confirmações de transição de fase frente a respostas vagas (\texttt{LA-03}, $f = 6$ relatos); (iv) resiliência a desvios de domínio, respondendo brevemente a provocações externas e reconduzindo o diálogo à etapa exata da elicitação sem custo extra de \textit{guardrails} pesados (\texttt{LA-04}, $f = 4$ relatos); (v) blindagem metodológica no formato Connextra de Histórias de Usuário frente a tentativas de uso de outros \textit{frameworks} como FDD (\texttt{LA-05}, $f = 3$ relatos); (vi) condução e validação unitária e incremental de requisitos em vez de processamento massivo em lote (\texttt{LA-06}, $f = 3$ relatos); e (vii) tratamento do estudante como cliente/\textit{stakeholder} na simulação de entrevista consultiva (\texttt{LA-07}, $f = 2$ relatos).
-    \item \textbf{Categoria 3 -- Trabalhos Futuros (\texttt{TF-01} a \texttt{TF-07}):} Sistematiza as sugestões discentes de inovação funcional, novos módulos de experiência do usuário e adição de tecnologias que extrapolam o escopo atual: (i) ingestão de arquivos (PDF, Markdown, \textit{links}) e contexto multimodal com imagens no \textit{chat} (\texttt{TF-01}, $f = 10$ relatos); (ii) interface de voz via transcrição de áudio por microfone (\texttt{TF-02}, $f = 4$ relatos); (iii) camada de \textit{onboarding} visual com dicas conceituais sobre etapas e artefatos (\texttt{TF-03}, $f = 3$ relatos); (iv) suporte parametrizável a múltiplos \textit{frameworks} de Engenharia de Requisitos (\texttt{TF-04}, $f = 3$ relatos); (v) visualização em grafo da matriz de rastreabilidade e geração de diagramas (\texttt{TF-05}, $f = 2$ relatos); (vi) transparência de raciocínio via componente expansível de \textit{Modo Pensamento} (\texttt{TF-06}, $f = 1$ relato); e (vii) botão de interrupção imediata da geração em andamento (\textit{Stop Generation}) (\texttt{TF-07}, $f = 1$ relato).
+    \item \textbf{Categoria 1 (Correções Imediatas, \texttt{CI-01} a \texttt{CI-04}):} Reúne os gargalos de usabilidade na interface atual e as falhas sistêmicas ou de sincronização de estado com impacto direto na integridade do projeto elicitado. Foram mapeados quatro pontos prioritários: as limitações de usabilidade no componente de entrada de dados, como ausência de redimensionamento vertical, perda de foco do cursor e falta de atalho para quebra de linha (\texttt{CI-01}, com 22 relatos); a falha de concorrência na Fase 11 (\texttt{Validação de Requisitos}), quando o agente tentava atualizar um requisito e submetê-lo à validação no mesmo turno ou alterar simultaneamente o atributo de pendências junto a outros dados do artefato, além da falta de mensagens de erro claras (\texttt{CI-02}, com 14 relatos); as fricções de navegação por ausência de rolagem automática no \textit{chat} e fechamento de modais restrito ao botão ``X'' (\texttt{CI-03}, com 5 relatos); e os casos pontuais de duplicação semântica na geração de artefatos ou menção no diálogo a \textit{Tags} já excluídas (\texttt{CI-04}, com 5 relatos).
+    \item \textbf{Categoria 2 (Limitações Aceitáveis e Delimitação de Escopo, \texttt{LA-01} a \texttt{LA-07}):} Agrupa comportamentos derivados de decisões metodológicas da pesquisa, que não devem ser removidos para não invalidar a engenharia de \textit{prompt} proposta, além de variações inerentes à natureza probabilística de LLMs já mitigadas pela arquitetura \textit{Human-in-the-Loop}. Esta categoria abrangeu sete aspectos: o uso da edição manual na barra lateral para refinar artefatos ou ajustar títulos genéricos definidos na criação do projeto (\texttt{LA-01}, com 12 relatos); a concisão dos artefatos e da granularidade do MVP para evitar extrapolações não fornecidas pelo aluno (\texttt{LA-02}, com 7 relatos); as variações não determinísticas pontuais de atenção e o rigor nas confirmações de transição de fase frente a respostas vagas (\texttt{LA-03}, com 6 relatos); a resiliência a desvios de domínio, respondendo brevemente a provocações externas e reconduzindo o diálogo à etapa exata da elicitação sem esforço extra com \textit{guardrails} (\texttt{LA-04}, com 4 relatos); a blindagem metodológica no formato Connextra de Histórias de Usuário frente a tentativas de uso de outros \textit{frameworks} como FDD (\texttt{LA-05}, com 3 relatos); a condução e validação unitária de requisitos em vez de processamento em lote (\texttt{LA-06}, com 3 relatos); e o tratamento do estudante como cliente ou \textit{stakeholder} na simulação de entrevista (\texttt{LA-07}, com 2 relatos).
+    \item \textbf{Categoria 3 (Trabalhos Futuros, \texttt{TF-01} a \texttt{TF-07}):} Sistematiza as sugestões discentes de inovação funcional, novos módulos de experiência do usuário e adição de tecnologias que extrapolam o escopo atual. Os pontos levantados compreenderam: a ingestão de arquivos (PDF, Markdown, \textit{links}) e contexto multimodal com imagens no \textit{chat} (\texttt{TF-01}, com 10 relatos); a interface de voz via transcrição de áudio por microfone (\texttt{TF-02}, com 4 relatos); uma camada de \textit{onboarding} visual com dicas conceituais sobre etapas e artefatos (\texttt{TF-03}, com 3 relatos); o suporte parametrizável a múltiplos \textit{frameworks} de Engenharia de Requisitos (\texttt{TF-04}, com 3 relatos); a visualização em grafo da matriz de rastreabilidade e geração de diagramas (\texttt{TF-05}, com 2 relatos); a transparência de raciocínio via componente expansível de \textit{Modo Pensamento} (\texttt{TF-06}, com 1 relato); e um botão de interrupção imediata da geração em andamento (\textit{Stop Generation}) (\texttt{TF-07}, com 1 relato).
 \end{itemize}
 
 \subsection{(A4.4) Aplicação das correções imediatas para refinamento do sistema}
 \label{subsec:exec_a44}
 
-Encerrando a Fase 3 (e o Ciclo de Design da DSR), a atividade A4.4 executou a manutenção corretiva e evolutiva do software, implementando no repositório do projeto as quatro intervenções mapeadas na Categoria 1 do plano de ação (\texttt{CI-01} a \texttt{CI-04}):
+Encerrando a Fase 3 e o Ciclo de Design da DSR, a atividade A4.4 executou a manutenção corretiva e evolutiva do software, implementando no repositório do projeto as quatro intervenções mapeadas na Categoria 1 do plano de ação (\texttt{CI-01} a \texttt{CI-04}):
 
 \begin{enumerate}
     \item \textbf{Reformulação do Componente de Entrada de Dados (\texttt{CI-01}):} O campo de formulário padrão de linha única no \textit{frontend} (React) foi substituído por uma caixa de texto dinâmica autoexpansível com suporte a múltiplas linhas, preservação de foco do cursor e remapeamento de eventos de teclado (envio via \texttt{Enter} e quebra de linha via \texttt{Shift + Enter}), facilitando a redação e revisão de respostas extensas.
-    \item \textbf{Resolução da Concorrência na Validação de Requisitos e Tratamento de Erros (\texttt{CI-02}):} Adequaram-se o \textit{System Prompt} e a orquestração do Motor de Operações no \textit{backend} para remover a exclusividade na alteração do atributo \texttt{pendencias\_validacao} durante edições e exigir que a operação de atualização (\texttt{atualizar}) seja persistida e auditada deterministicamente pelo servidor antes da emissão do comando final de aprovação (\texttt{validar}), ignorando com segurança acionamentos prematuros no mesmo turno. Adicionalmente, aprimorou-se o tratamento de mensagens de erro na interface para apresentar retornos claros ao usuário.
-    \item \textbf{Melhorias de Navegação no \textit{Chat} e Fechamento de Modais (\texttt{CI-03}):} Implementaram-se âncoras de rolagem automática (\textit{auto-scroll}) no contêiner de mensagens a cada turno enviado ou recebido e adicionaram-se ouvintes de evento para permitir o fechamento de modais de artefatos diretamente pelo clique na camada de fundo (\textit{backdrop}).
-    \item \textbf{Refinamento das Diretrizes de Manutenção de Identidade e Exclusão no \textit{Prompt} (\texttt{CI-04}):} O \textit{System Prompt} de orquestração foi atualizado, reforçando a seção de \textit{``Manutenção de Identidade por Tag e Controle de Duplicatas''} para restringir a emissão de comandos \texttt{criar} quando houver equivalência semântica com elementos já existentes na memória e garantir que \textit{Tags} descartadas manualmente sejam tratadas como inexistentes pelo modelo.
+    \item \textbf{Resolução da Concorrência na Validação de Requisitos e Tratamento de Erros (\texttt{CI-02}):} O \textit{System Prompt} e a orquestração do Motor de Operações no \textit{backend} foram modificados para remover a exclusividade na alteração do atributo \texttt{pendencias\_validacao} durante edições e exigir que a operação de atualização (\texttt{atualizar}) seja persistida e auditada deterministicamente pelo \textit{backend} antes da emissão do comando final de aprovação (\texttt{validar}), ignorando com segurança acionamentos prematuros no mesmo turno. Adicionalmente, o tratamento de mensagens de erro na interface foi aprimorado para apresentar retornos claros ao usuário.
+    \item \textbf{Melhorias de Navegação no \textit{Chat} e Fechamento de Modais (\texttt{CI-03}):} Foram implementadas âncoras de rolagem automática (\textit{auto-scroll}) no contêiner de mensagens a cada turno enviado ou recebido, bem como ouvintes de evento para permitir o fechamento de modais de artefatos diretamente pelo clique na camada de fundo (\textit{backdrop}).
+    \item \textbf{Refinamento das Diretrizes de Manutenção de Identidade e Exclusão no \textit{Prompt} (\texttt{CI-04}):} O \textit{System Prompt} foi atualizado na seção de \textit{``Manutenção de Identidade por Tag e Controle de Duplicatas''}, restringindo a emissão de comandos \texttt{criar} quando houver equivalência semântica com elementos já existentes na memória e garantindo que \textit{Tags} de artefatos descartados sejam tratadas como inexistentes pelo modelo.
 \end{enumerate}
+
+\section{Fase 4: Avaliação e Análise de Resultados}
+\label{sec:execucao_fase4}
+
+Concluída a validação presencial em laboratório e a aplicação das correções imediatas na Fase 3, a Fase 4 concentrou-se no processamento dos dados coletados para responder ao quinto objetivo específico da pesquisa (OE5). A presente seção expõe de forma direta os dados quantitativos apurados na atividade A5.1, enquanto a interpretação crítica desses indicadores, a triangulação metodológica com os relatos qualitativos (A5.2) e a análise comparativa entre as versões da ferramenta (A5.3) são desenvolvidas no Capítulo \ref{cap:analise}.
+
+\subsection{(A5.1) Consolidação, higienização e apuração estatística dos dados quantitativos}
+\label{subsec:exec_a51}
+
+A apuração quantitativa processou as respostas fechadas em escala ordinal (Likert de 1 a 5 pontos) e a métrica categórica de progressão no fluxo de elicitação obtidas junto aos $N = 65$ estudantes respondentes. Os 20 itens avaliativos do instrumento foram agrupados em cinco dimensões teóricas (construtos) alinhadas às fases da Máquina de Estados do ElicitBot:
+
+\begin{itemize}
+    \item \textbf{Condução Conversacional e Controle de Processo (D1, 6 itens):} Avalia o respeito à sequência lógica de fases, a cadência de perguntas por turno, a investigação do problema real antes da solução, a retenção de contexto, a solicitação de confirmação nas transições e a adequação da linguagem.
+    \item \textbf{Modelagem do Problema e Domínio de Negócio (D2, 5 itens):} Avalia a compreensão da dor real, o levantamento das partes interessadas (\textit{stakeholders}), o mapeamento de interesses e necessidades, o foco em valor e objetivos de negócio mensuráveis e o isolamento semântico de restrições.
+    \item \textbf{Concepção e Viabilidade de Soluções (D3, 3 itens):} Avalia o alinhamento das alternativas propostas aos problemas e objetivos, a adesão às restrições técnicas e orçamentárias e a clareza e viabilidade prática das soluções.
+    \item \textbf{Especificação, Verificabilidade e Rastreabilidade de Requisitos (D4, 4 itens):} Avalia a adesão ao formato padrão Connextra de Histórias de Usuário, a fidelidade das regras de negócio extraídas, a verificabilidade dos critérios de aceitação e a manutenção de vínculos de rastreabilidade.
+    \item \textbf{Satisfação Geral e Potencial de Adoção (D5, 2 itens):} Avalia a satisfação global com a interação e os resultados obtidos, bem como o potencial de adoção da ferramenta em projetos acadêmicos ou profissionais futuros.
+\end{itemize}
+
+\subsubsection*{Consistência Interna e Funil de Progressão na Elicitação}
+
+Inicialmente, foi verificada a confiabilidade do instrumento por meio do coeficiente Alfa de Cronbach ($\alpha$), considerando os registros com preenchimento integral em todas as 20 variáveis ($n = 52$). O questionário obteve \textbf{$\alpha = 0,877$}, índice superior ao limiar de referência adotado na literatura ($\alpha \ge 0,70$), confirmando a consistência interna das respostas.
+
+Em seguida, foi tabulada a variável categórica \textit{Progresso na Elicitação}, que registrou a etapa máxima da Máquina de Estados alcançada por cada participante durante o tempo da sessão prática. A distribuição de retenção ao longo do fluxo é apresentada na Tabela \ref{tab:funil_progressao}.
+
+\noindent
+{
+\footnotesize 
+\renewcommand{\arraystretch}{1.15}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+
+\begin{xltabular}{\textwidth}{|>{\raggedright\arraybackslash}X|c|c|c|>{\raggedright\arraybackslash}p{3.0cm}|}
+    \caption{Funil de Progressão e Retenção de Participantes na Máquina de Estados ($N = 65$)}
+    \label{tab:funil_progressao} \\
+    \toprule
+    \textbf{Etapa Máxima Atingida no Fluxo} & \textbf{Freq. Absoluta ($n$)} & \textbf{Freq. Relativa (\%)} & \textbf{Freq. Acumulada ($\ge$ Etapa)} & \textbf{Identificadores (Paradas Prematuras)} \\
+    \midrule
+    \endfirsthead
+
+    \bottomrule
+    \multicolumn{5}{c}{\small Fonte: Elaborada pelo autor a partir dos dados da validação ($N = 65$).} \\
+    \endlastfoot
+    
+    Confirmar Escopo (Fase 12, Final) & 27 & 41,5\% & 41,5\% & N/A \\
+    \midrule
+    Validação de Requisitos (Fase 11, Penúltima) & 8 & 12,3\% & 53,8\% & N/A \\
+    \midrule
+    Requisitos Funcionais (Fase 10, Antepenúltima) & 25 & 38,5\% & \textbf{92,3\%} & N/A \\
+    \midrule
+    Validação de Solução (Fase 9) & 2 & 3,1\% & 95,4\% & \texttt{[P3, P55]} \\
+    \midrule
+    Objetivos de Negócio (Fase 5) & 2 & 3,1\% & 98,5\% & \texttt{[P33, P49]} \\
+    \midrule
+    Contexto (Fase 1, Inicial) & 1 & 1,5\% & 100,0\% & \texttt{[P44]} \\
+    \midrule
+    \textbf{Total de Participantes Avaliados} & \textbf{65} & \textbf{100,0\%} & N/A & N/A \\
+\end{xltabular}
+}
+
+Os dados da Tabela \ref{tab:funil_progressao} demonstram que \textbf{92,3\% dos participantes} ($n = 60$ de 65) concluíram todas as etapas de entendimento de domínio e concepção de solução, atingindo ao menos a Fase 10 (\texttt{Requisitos Funcionais}), sendo que 41,5\% ($n = 27$) finalizaram integralmente a Fase 12 (\texttt{Confirmar Escopo}) e 50,8\% ($n = 33$) encerraram o horário de laboratório concentrados nas Fases 10 e 11. Apenas 5 participantes (7,7\%, correspondentes aos respondentes \texttt{[P3, P33, P44, P49, P55]}) relataram interrupção em fases preliminares ou intermediárias.
+
+\subsubsection*{Estatísticas Descritivas por Critério e Dimensão e Higienização Condicional}
+
+Para cada um dos 20 critérios e 5 dimensões, foram calculados o número de respostas válidas ($N$), a Média ($\mu$), o Desvio Padrão ($\sigma$), a Mediana ($Md$), a Moda ($Mo$), a Taxa de Aprovação Positiva (\textit{Top-2 Box}, proporção de notas 4 e 5), o percentual de nota máxima ($= 5$) e a distribuição absoluta de frequências nos cinco níveis da escala (\texttt{[1, 2, 3, 4, 5]}). A média global do instrumento, considerando todos os 20 critérios, foi de \textbf{$\mu = 4,49$}, sendo que \textbf{todos os 20 itens apresentaram Mediana ($Md = 5,0$) e Moda ($Mo = 5,0$) iguais à nota máxima da escala}. A Tabela \ref{tab:estatisticas_descritivas} consolida os resultados ordenados pela média dentro de cada dimensão.
+
+\noindent
+{
+\footnotesize 
+\renewcommand{\arraystretch}{1.15}
+\setlength{\LTleft}{0pt}
+\setlength{\LTright}{0pt}
+
+\begin{xltabular}{\textwidth}{|>{\raggedright\arraybackslash}p{2.3cm}|>{\raggedright\arraybackslash}X|c|c|c|c|c|c|}
+    \caption{Estatísticas Descritivas e Distribuição de Respostas por Dimensão e Critério ($Md = 5,0$ e $Mo = 5,0$ em todos os itens)}
+    \label{tab:estatisticas_descritivas} \\
+    \toprule
+    \textbf{Dimensão} & \textbf{Critério Avaliado} & \textbf{$N$} & \textbf{Média ($\mu$)} & \textbf{Desvio ($\sigma$)} & \textbf{\textit{Top-2 Box}} & \textbf{Nota Máx. ($=5$)} & \textbf{Dist. \texttt{[1,2,3,4,5]}} \\
+    \midrule
+    \endfirsthead
+
+    \multicolumn{8}{c}%
+    {{\bfseries \tablename\ \thetable{} -- continuação da página anterior}} \\
+    \toprule
+    \textbf{Dimensão} & \textbf{Critério Avaliado} & \textbf{$N$} & \textbf{Média ($\mu$)} & \textbf{Desvio ($\sigma$)} & \textbf{\textit{Top-2 Box}} & \textbf{Nota Máx. ($=5$)} & \textbf{Dist. \texttt{[1,2,3,4,5]}} \\
+    \midrule
+    \endhead
+
+    \midrule \multicolumn{8}{r}{{Continua na próxima página...}} \\
+    \endfoot
+
+    \bottomrule
+    \multicolumn{8}{c}{\small Fonte: Elaborada pelo autor a partir dos dados quantitativos da validação ($N = 65$).} \\
+    \endlastfoot
+    
+    \textbf{D1: Condução} \newline ($\mu = 4,58$) & Validação de Transição & 65 & 4,83 & 0,52 & 96,9\% & 87,7\% & \texttt{[0, 1, 1, 6, 57]} \\
+    \cline{2-8}
+    & Adesão ao Fluxo Lógico & 65 & 4,78 & 0,41 & 100,0\% & 78,5\% & \texttt{[0, 0, 0, 14, 51]} \\
+    \cline{2-8}
+    & Investigação do Problema Real & 65 & 4,68 & 0,59 & 93,8\% & 73,8\% & \texttt{[0, 0, 4, 13, 48]} \\
+    \cline{2-8}
+    & Adequação da Linguagem & 65 & 4,60 & 0,55 & 96,9\% & 63,1\% & \texttt{[0, 0, 2, 22, 41]} \\
+    \cline{2-8}
+    & Cadência de Perguntas & 65 & 4,48 & 0,71 & 87,7\% & 60,0\% & \texttt{[0, 0, 8, 18, 39]} \\
+    \cline{2-8}
+    & Retenção de Contexto & 65 & 4,09 & 1,17 & 69,2\% & 53,8\% & \texttt{[3, 3, 14, 10, 35]} \\
+    \midrule
+    \textbf{D2: Negócio} \newline ($\mu = 4,42$) & Compreensão da Dor Real & 64 & 4,52 & 0,62 & 93,8\% & 57,8\% & \texttt{[0, 0, 4, 23, 37]} \\
+    \cline{2-8}
+    & Levantamento dos Envolvidos & 64 & 4,52 & 0,71 & 90,6\% & 62,5\% & \texttt{[0, 1, 5, 18, 40]} \\
+    \cline{2-8}
+    & Isolamento Semântico de Restrições & 64 & 4,39 & 0,83 & 84,4\% & 57,8\% & \texttt{[0, 2, 8, 17, 37]} \\
+    \cline{2-8}
+    & Foco em Valor e Resultados & 64 & 4,36 & 0,82 & 84,4\% & 54,7\% & \texttt{[0, 2, 8, 19, 35]} \\
+    \cline{2-8}
+    & Interesses dos Envolvidos & 63 & 4,33 & 0,84 & 87,3\% & 50,8\% & \texttt{[1, 1, 6, 23, 32]} \\
+    \midrule
+    \textbf{D3: Soluções} \newline ($\mu = 4,50$) & Adesão às Restrições & 63 & 4,63 & 0,55 & 96,8\% & 66,7\% & \texttt{[0, 0, 2, 19, 42]} \\
+    \cline{2-8}
+    & Alinhamento da Solução & 64 & 4,53 & 0,64 & 95,3\% & 59,4\% & \texttt{[0, 1, 2, 23, 38]} \\
+    \cline{2-8}
+    & Clareza e Viabilidade das Soluções & 62 & 4,32 & 0,83 & 83,9\% & 51,6\% & \texttt{[0, 2, 8, 20, 32]} \\
+    \midrule
+    \textbf{D4: Requisitos} \newline ($\mu = 4,50$) & Rastreabilidade de Requisitos & 58 & 4,60 & 0,56 & 96,6\% & 63,8\% & \texttt{[0, 0, 2, 19, 37]} \\
+    \cline{2-8}
+    & Adesão ao Formato Padrão & 61 & 4,57 & 0,88 & 90,2\% & 73,8\% & \texttt{[2, 0, 4, 10, 45]} \\
+    \cline{2-8}
+    & Fidelidade de Regras & 55 & 4,42 & 0,69 & 89,1\% & 52,7\% & \texttt{[0, 0, 6, 20, 29]} \\
+    \cline{2-8}
+    & Verificabilidade & 57 & 4,40 & 0,70 & 87,7\% & 52,6\% & \texttt{[0, 0, 7, 20, 30]} \\
+    \midrule
+    \textbf{D5: Geral} \newline ($\mu = 4,39$) & Interação e Resultados & 65 & 4,40 & 0,70 & 90,8\% & 50,8\% & \texttt{[0, 1, 5, 26, 33]} \\
+    \cline{2-8}
+    & Potencial de Uso & 65 & 4,38 & 0,84 & 83,1\% & 58,5\% & \texttt{[0, 2, 9, 16, 38]} \\
+\end{xltabular}
+}
+
+Por fim, foi executado o procedimento de \textbf{Higienização Condicional}. Observou-se na Tabela \ref{tab:estatisticas_descritivas} que o total de respostas válidas ($N$) reduz-se de $N = 65$ nas dimensões iniciais para $N = 55$ a $61$ na dimensão de Requisitos (D4), refletindo abstenções voluntárias de participantes que não concluíram as etapas finais. Contudo, parte dos 5 respondentes que encerraram a sessão antes da Fase 10 (\texttt{[P3, P33, P44, P49, P55]}) preencheu avaliações para itens de D3 e/ou D4. Ao aplicar a filtragem estrita por fase atingida, recalculando os indicadores de D3 e D4 exclusivamente para o subgrupo de 60 participantes que efetivamente alcançou a etapa de Requisitos Funcionais, verificou-se variação máxima de \textbf{$\pm 0,02$ ponto} nas médias de D4 (\textit{Adesão ao Formato Padrão} passou de $\mu = 4,57$ para $\mu = 4,55$; \textit{Fidelidade de Regras}, de $\mu = 4,42$ para $\mu = 4,40$; \textit{Verificabilidade}, de $\mu = 4,40$ para $\mu = 4,41$; e \textit{Rastreabilidade de Requisitos} permaneceu inalterada em $\mu = 4,60$), mantendo-se $Md = 5,0$ em todos os critérios.
+
+Com a exposição direta dos resultados de execução e dos levantamentos empíricos concluída, o capítulo a seguir aprofunda a análise crítica desses dados, a triangulação metodológica entre achados quantitativos e qualitativos (A5.2), a comparação sistemática com a versão original da ferramenta (A5.3), as contribuições científicas e práticas e as limitações do estudo.
